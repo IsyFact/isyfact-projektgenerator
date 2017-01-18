@@ -1,0 +1,57 @@
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#eintrag_form input, #eintrag_form textarea {
+    border: 4px solid rgba(0,0,0,0.1);
+    padding: 8px 10px;
+    border-radius: 5px;
+    outline: 0;
+}
+
+#eintrag_form textarea {
+    width: 500px;
+}
+
+#eintrag_form input[type="submit"] {
+    cursor: pointer;
+    background: linear-gradient(top, #efefef, #ddd);
+    color: #333;
+    text-shadow: 0px 1px 1px rgba(255,255,255,1);
+    border: 1px solid #ccc;
+}
+
+#eintrag_form input[type="submit"]:hover {
+    background: linear-gradient(top, #eee, #ccc);
+    border: 1px solid #bbb;
+}
+
+#eintrag_form input[type="submit"]:active {
+    background: linear-gradient(top, #ddd, #aaa);
+    border: 1px solid #999;
+}
+
+ol {
+    list-style-type: none;
+    width: 500px;
+}
+
+verfasser {
+    font: bold 12px Helvetica, sans-serif;
+    float: right;
+}
+
+li eintrag {
+    font: 200 12px Helvetica, sans-serif;
+}
+
+li {
+    padding: 10px;
+    overflow: auto;
+}
+
+li:hover {
+    background: #eee;
+    cursor: pointer;
+}
