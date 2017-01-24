@@ -54,7 +54,7 @@ public class KommentareControllerTest {
     @Test
     @ExpectedDatabase("eintraege.xml")
     public void testLeseEintraege() throws Exception {
-        String expectedContent = "[{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor1${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar1${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10 11:00:00${symbol_escape}"},{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor2${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar2${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10 12:00:00${symbol_escape}"}]";
+        String expectedContent = "[{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor1${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar1${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10 12:00:00${symbol_escape}"},{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor2${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar2${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10 13:00:00${symbol_escape}"}]";
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/eintrag").accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
