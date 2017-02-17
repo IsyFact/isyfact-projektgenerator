@@ -1,39 +1,68 @@
-=== IsyFact-Projektgenerator (Maven Archetype)
+=== IsyFact-Projektgenerator
 
-Das Porjekt enthält einen Projektgenerator in Form eines Maven Archetypes.
+Das Projekt enthält einen Projektgenerator in Form eines Maven Archetypes.
+Ein mit dem Projektgenerator erzeugtes Projekt enthält:
+
+- Eine einfache lauffähige Anwendung
+- Eine Verzeichnisstruktur für Code, Tests und Konfigurationsdateien für die wesentlichen Schichten einer IsyFact-Anwendung (Persistenz, Anwendungskern, Service/GUI)
+- Einen einfachen Integrationstest, der die Anwendung auf Lauffähigkeit prüft
+
+Das generierte Projekt stellt somit einen Ausgangspunkt für Code, Tests und Konfigurationsdateien für ein eigenes Projekt zur Verfügung.
 
 ==== Verwendung
 
-1. Bau des Archetypes und Installation in lokales Maven-Repository
+Vor der Verwendeng muss der Archetype gebaut und im lokalen Maven-Repository installiert werden.
 
-Download der Sourcen:
+===== Bau des Archetypes und Installation in lokales Maven-Repository
 
-    git clone https://github.com/IsyFact/IsyFact-Projektgenerator
+1. Download der Sourcen:
 
-Bauen des Archetypes:
+    git clone https://github.com/IsyFact/isyfact-projectgenerator
 
+2. Bauen des Archetypes:
 
-    cd isyfact-archetype
+    cd isyfact-projectgenerator
     mvn install
 
-Der Archetype liegt nun im lokalen Maven-Repository unter `<REPO>/de/bund/bva/isyfact/isyfact-archetype`
+Der Archetype liegt nun im lokalen Maven-Repository unter `<REPO>/de/bund/bva/isyfact/isyfact-projectgenerator`.
 
-2. Generierung eines Projekts
+===== Generierung eines Projekts
 
-- Eclipse
+Aus dem Archetype wird ein Maven-Projekt erzeugt.
+Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile geschehen.
 
-- IntelliJ IDEA
+====== Eclipse / Spring Tool Suite
 
-    File -> New -> Project... -> Haken Create from Archetype -> Add Archetype
+1. `File` -> `New` -> `Maven Project` -> Haken `Create a simple project (skip archetype selection)` nicht setzten
+2. Im Schritt `Select an Archetype` ist unter `Catalog` der Eintrag `Default local` auszuwählen.
+3. Archetype `de.bund.bva.isyfact:isyfact-projectgenerator` auswählen.
+4. Wizard bis zum Ende ausführen.
+
+====== IntelliJ IDEA
+
+1. `File` -> `New` -> `Project...` -> Haken `Create from Archetype` setzen -> `Add Archetype`
+2. Im Dialog folgende Werte eintragen:
+
     GroupId: de.bund.bva.isyfact
-    ArtifactId: isyfact-archetype
+    ArtifactId: isyfact-projectgenerator
     Version: 1.3
     Repository (optional): local
 
-- Maven (Kommandozeile)
+3. Archetype `de.bund.bva.isyfact:isyfact-projectgenerator` auswählen.
+4. Wizard bis zum Ende ausführen.
 
-3. Start der Anwendung
+====== Maven (Kommandozeile)
+
+Mit dem Maven-Aufruf
+
+    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projectgenerator -DarchetypeVersion=1.3 -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
+
+wird ein Maven-Projekt `meinprojekt` mit der `ArtifactId` `meinprojekt` und `GroupId` `meinegroupid` erzeugt.
 
 ==== Die Hello-World-Anwendung des Projektgenerators
 
-kurze Führung durch die Hello-World-Anwendung - was ist enthalten, welche Teile der IF werden präsentiert
+Die Anwendung präsentiert eine einfache Gästebuch/Kommentar-Funktion.
+Es können Einträge unter Angabe eines Texts und eines Verfassers erstellt und gespeichert werden.
+
+Die Oberfläche verwendet HTML und JavaScript (jQuery) und kommuniziert über einen einfachen REST-Service mit dem Anwendungskern.
+Dieser speichert die Einträge in einer H2-Datenbank (in-memory).
