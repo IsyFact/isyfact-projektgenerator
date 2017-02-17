@@ -3,26 +3,6 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.rest;
 
-/*-
- * #%L
- * IsyFact-Projektgenerator
- * %%
- * Copyright (C) 2017 Bundesverwaltungsamt (BVA), msg systems ag
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * #L%
- */
-
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -48,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class})
 @DatabaseSetup("eintraege.xml")
 @WebAppConfiguration
-public class KommentareControllerTest {
+public class EintragControllerTest {
 
     @Autowired
     private WebApplicationContext ctx;
@@ -74,7 +54,7 @@ public class KommentareControllerTest {
     @Test
     @ExpectedDatabase("eintraege.xml")
     public void testLeseEintraege() throws Exception {
-        String expectedContent = "[{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor1${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar1${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10 12:00:00${symbol_escape}"},{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor2${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar2${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10 13:00:00${symbol_escape}"}]";
+        String expectedContent = "[{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor1${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar1${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10T11:00Z${symbol_escape}"},{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor2${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar2${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10T12:00Z${symbol_escape}"}]";
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/eintrag").accept(MediaType.APPLICATION_JSON_UTF8_VALUE))

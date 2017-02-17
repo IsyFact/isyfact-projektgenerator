@@ -1,1 +1,39 @@
-= IsyFact-Projektgenerator
+=== IsyFact-Projektgenerator (Maven Archetype)
+
+Das Porjekt enthält einen Projektgenerator in Form eines Maven Archetypes.
+
+==== Verwendung
+
+1. Bau des Archetypes und Installation in lokales Maven-Repository
+
+Download der Sourcen:
+
+    git clone https://github.com/IsyFact/IsyFact-Projektgenerator
+
+Bauen des Archetypes:
+
+
+    cd isyfact-archetype
+    mvn install
+
+Der Archetype liegt nun im lokalen Maven-Repository unter `<REPO>/de/bund/bva/isyfact/isyfact-archetype`
+
+2. Generierung eines Projekts
+
+- Eclipse
+
+- IntelliJ IDEA
+
+    File -> New -> Project... -> Haken Create from Archetype -> Add Archetype
+    GroupId: de.bund.bva.isyfact
+    ArtifactId: isyfact-archetype
+    Version: 1.3
+    Repository (optional): local
+
+- Maven (Kommandozeile)
+
+3. Start der Anwendung
+
+==== Die Hello-World-Anwendung des Projektgenerators
+
+kurze Führung durch die Hello-World-Anwendung - was ist enthalten, welche Teile der IF werden präsentiert
