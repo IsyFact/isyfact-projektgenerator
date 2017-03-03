@@ -20,7 +20,7 @@ limitations under the License.
 function ladeEintraege() {
     $.ajax({
         type: "GET",
-        url: "/eintrag",
+        url: "eintrag",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, status, jqXHR) {
@@ -61,7 +61,7 @@ function neuenEintragErstellen() {
 
     $.ajax({
         type: "POST",
-        url: "/eintrag",
+        url: "eintrag",
         data: JSON.stringify(jsonData),
         contentType: "application/json; charset=utf-8",
         success: function (data, status, jqXHR) {
