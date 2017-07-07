@@ -1,4 +1,4 @@
-=== IsyFact-Projektgenerator
+= IsyFact-Projektgenerator
 
 Das Projekt enthält einen Projektgenerator in Form eines Maven Archetypes.
 Ein mit dem Projektgenerator erzeugtes Projekt enthält:
@@ -9,11 +9,11 @@ Ein mit dem Projektgenerator erzeugtes Projekt enthält:
 
 Das generierte Projekt stellt somit einen Ausgangspunkt für Code, Tests und Konfigurationsdateien für ein eigenes Projekt zur Verfügung.
 
-==== Verwendung
+== Verwendung
 
 Vor der Verwendeng muss der Archetype gebaut und im lokalen Maven-Repository installiert werden.
 
-===== Bau des Archetypes und Installation in lokales Maven-Repository
+=== Bau des Archetypes und Installation in lokales Maven-Repository
 
 1. Download der Sourcen:
 
@@ -26,19 +26,19 @@ Vor der Verwendeng muss der Archetype gebaut und im lokalen Maven-Repository ins
 
 Der Archetype liegt nun im lokalen Maven-Repository unter `<REPO>/de/bund/bva/isyfact/isyfact-projektgenerator`.
 
-===== Generierung eines Projekts
+=== Generierung eines Projekts
 
 Aus dem Archetype wird ein Maven-Projekt erzeugt.
 Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile geschehen.
 
-====== Eclipse / Spring Tool Suite
+==== Eclipse / Spring Tool Suite
 
 1. `File` -> `New` -> `Maven Project` -> Haken `Create a simple project (skip archetype selection)` nicht setzten
 2. Im Schritt `Select an Archetype` ist unter `Catalog` der Eintrag `Default local` auszuwählen.
 3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
 4. Wizard bis zum Ende ausführen.
 
-====== IntelliJ IDEA
+==== IntelliJ IDEA
 
 1. `File` -> `New` -> `Project...` -> Haken `Create from Archetype` setzen -> `Add Archetype`
 2. Im Dialog folgende Werte eintragen:
@@ -51,7 +51,7 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
 4. Wizard bis zum Ende ausführen.
 
-====== Maven (Kommandozeile)
+==== Maven (Kommandozeile)
 
 Mit dem Maven-Aufruf
 
@@ -59,7 +59,7 @@ Mit dem Maven-Aufruf
 
 wird ein Maven-Projekt `meinprojekt` mit der `ArtifactId` `meinprojekt` und `GroupId` `meinegroupid` erzeugt.
 
-==== Die Hello-World-Anwendung des Projektgenerators
+== Die Hello-World-Anwendung des Projektgenerators
 
 Die Anwendung präsentiert eine einfache Gästebuch/Kommentar-Funktion.
 Es können Einträge unter Angabe eines Texts und eines Verfassers erstellt und gespeichert werden.

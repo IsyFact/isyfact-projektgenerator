@@ -9,7 +9,7 @@
 
   <name>IsyFact-Projektgenerator</name>
   <description>Generiert eine IsyFact-Konforme Hello-World Anwendung</description>
-  <url>https://github.com/IsyFact/isyfact-projectgenerator</url>
+  <url>https://github.com/IsyFact/isyfact-projektgenerator</url>
 
   <organization>
     <name>Bundesverwaltungsamt (BVA), msg systems ag</name>
@@ -32,9 +32,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:IsyFact/isyfact-projectgenerator.git</connection>
-    <developerConnection>scm:git:git@github.com:IsyFact/isyfact-projectgenerator.git</developerConnection>
-    <url>git@github.com:IsyFact/isyfact-projectgenerator.git</url>
+    <connection>scm:git:git@github.com:IsyFact/isyfact-projektgenerator.git</connection>
+    <developerConnection>scm:git:git@github.com:IsyFact/isyfact-projektgenerator.git</developerConnection>
+    <url>git@github.com:IsyFact/isyfact-projektgenerator.git</url>
   </scm>
 
   <build>
