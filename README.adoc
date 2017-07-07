@@ -17,14 +17,14 @@ Vor der Verwendeng muss der Archetype gebaut und im lokalen Maven-Repository ins
 
 1. Download der Sourcen:
 
-    git clone https://github.com/IsyFact/isyfact-projectgenerator
+    git clone https://github.com/IsyFact/isyfact-projektgenerator
 
 2. Bauen des Archetypes:
 
-    cd isyfact-projectgenerator
+    cd isyfact-projektgenerator
     mvn install
 
-Der Archetype liegt nun im lokalen Maven-Repository unter `<REPO>/de/bund/bva/isyfact/isyfact-projectgenerator`.
+Der Archetype liegt nun im lokalen Maven-Repository unter `<REPO>/de/bund/bva/isyfact/isyfact-projektgenerator`.
 
 ===== Generierung eines Projekts
 
@@ -35,7 +35,7 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 
 1. `File` -> `New` -> `Maven Project` -> Haken `Create a simple project (skip archetype selection)` nicht setzten
 2. Im Schritt `Select an Archetype` ist unter `Catalog` der Eintrag `Default local` auszuwählen.
-3. Archetype `de.bund.bva.isyfact:isyfact-projectgenerator` auswählen.
+3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
 4. Wizard bis zum Ende ausführen.
 
 ====== IntelliJ IDEA
@@ -44,18 +44,18 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 2. Im Dialog folgende Werte eintragen:
 
     GroupId: de.bund.bva.isyfact
-    ArtifactId: isyfact-projectgenerator
+    ArtifactId: isyfact-projektgenerator
     Version: 1.3.1
     Repository (optional): local
 
-3. Archetype `de.bund.bva.isyfact:isyfact-projectgenerator` auswählen.
+3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
 4. Wizard bis zum Ende ausführen.
 
 ====== Maven (Kommandozeile)
 
 Mit dem Maven-Aufruf
 
-    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projectgenerator -DarchetypeVersion=1.3.1 -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
+    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projektgenerator -DarchetypeVersion=1.3.1 -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
 
 wird ein Maven-Projekt `meinprojekt` mit der `ArtifactId` `meinprojekt` und `GroupId` `meinegroupid` erzeugt.
 
