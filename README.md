@@ -1,2 +1,0 @@
-# isyfact-projectgenerator
-IsyFact-Projektgenerator
