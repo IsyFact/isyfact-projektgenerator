@@ -45,7 +45,7 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 
     GroupId: de.bund.bva.isyfact
     ArtifactId: isyfact-projektgenerator
-    Version: 1.6.1
+    Version: 1.6.2
     Repository (optional): local
 
 3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
