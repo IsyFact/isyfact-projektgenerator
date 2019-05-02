@@ -45,7 +45,7 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 
     GroupId: de.bund.bva.isyfact
     ArtifactId: isyfact-projektgenerator
-    Version: 1.7.0-SNAPSHOT
+    Version: 1.7.0-RC1
     Repository (optional): local
 
 3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
@@ -55,7 +55,7 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 
 Mit dem Maven-Aufruf
 
-    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projektgenerator -DarchetypeVersion=1.7.0-SNAPSHOT -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
+    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projektgenerator -DarchetypeVersion=1.7.0-RC1 -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
 
 wird ein Maven-Projekt `meinprojekt` mit der `ArtifactId` `meinprojekt` und `GroupId` `meinegroupid` erzeugt.
 
