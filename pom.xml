@@ -27,19 +27,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <description>IsyFact-Projektgenerator Parent</description>
-
-    <distributionManagement>
-        <repository>
-            <id>repository</id>
-            <name>Repository</name>
-            <url>${deploy-url-release}</url>
-        </repository>
-        <snapshotRepository>
-            <id>repository</id>
-            <name>Repository</name>
-            <url>${deploy-url-snapshot}</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
