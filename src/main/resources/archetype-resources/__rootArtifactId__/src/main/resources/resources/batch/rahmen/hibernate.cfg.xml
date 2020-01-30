@@ -1,0 +1,24 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!DOCTYPE hibernate-configuration SYSTEM
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.Oracle10gDialect
+		</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
+		<property name="hibernate.connection.isolation">4</property>
+		<property name="hibernate.jdbc.batch_size">20</property>
+		<property name="hibernate.jdbc.use_streams_for_binary">
+			true
+		</property>
+		<property name="hibernate.transaction.factory_class">
+			org.hibernate.transaction.JDBCTransactionFactory
+		</property>
+		<property name="show_sql">false</property>
+		<property name="format_sql">true</property>
+		<mapping resource="resources/plis-batchrahmen/hibernate/hibernate-mapping.xml"/>
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================================     
+		Maven Projektdefinition für Batches
+		
+    Author: Simon Spielmann
+    Revision: $Id: pom.xml 163804 2014-10-22 07:54:47Z sdm_kwezowski $      
+    =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <packaging>jar</packaging>
+    <version>${version}</version>    
+    <name>${artifactId}</name>
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}-parent</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/dependency-libs</outputDirectory>
+                            <exludeScopes>test</exludeScopes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>createData</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <tasks>
+
+                                <!-- benoetigte Dateien kopieren -->
+
+                                <unzip src="${project.build.directory}/dependency-libs/${rootArtifactId}-${project.version}.war" dest="${project.build.directory}/war" />
+
+
+                                <move todir="${project.build.directory}/classes/lib">
+                                    <fileset dir="${project.build.directory}/war/WEB-INF/lib" includes="*.jar *.zip" />
+                                </move>
+                                <move todir="${project.build.directory}/classes/" file="${project.build.directory}/war/WEB-INF/classes" />
+                                <delete file="${project.build.directory}/dependency-libs/${rootArtifactId}-${project.version}.war" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!-- =============================================================================================
+        Liste der benoetigten Bibliotheken.
+        ============================================================================================= -->
+    <dependencies>
+
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}</artifactId>
+            <type>war</type>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>

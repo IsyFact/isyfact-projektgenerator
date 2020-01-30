@@ -1,0 +1,158 @@
+###############################################################################
+###############################################################################
+###############################################################################
+
+# Durch BVA unerwuenscht: #
+#######################
+# Committing a file with one of these endings will lateron cause the BVA's GitLab to reject the commit
+# These are INDISCUSSABLE!
+*.exe
+*.pdf
+*.jar
+*.docx
+*.doc
+*.ppt
+*.pptx
+
+# Sinnvolle Erg�nzungen: #
+##########################
+# Quellen: https://gist.github.com/octocat/9257657 https://gist.github.com/zpetr/e783d537f8a40bb6ec16
+
+# Compiled sources:
+*.com
+*.dll
+*.o
+*.so
+
+# Packages; Reason: it's better to unpack these files and commit the raw source git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+*.war
+*.ear
+
+# Databases; Diskussionsw�rdig:
+*.sqlite
+
+# OS generated files:
+.DS_Store?
+ehthumbs.db
+desktop.ini
+
+# IDE files, not covered by the auto-generated .gitignore:
+nbproject
+.idea
+composer.lock
+.toDelete
+/**/target/
+/**/generated/
+*.checkstyle
+*.springBeans
+
+# git diff files:
+*.orig
+
+###############################################################################
+###############################################################################
+###############################################################################
+
+# Projectspecific: #
+####################
+.apt_generated/
+*.iml
+
+###############################################################################
+###############################################################################
+###############################################################################
+
+# Created by https://www.gitignore.io/api/linux,windows,macos,java,android,vim,eclipse,netbeans,intellij,libreoffice,microsoftoffice,tortoisegit,gradle,jboss,svn
+
+### NetBeans ###
+nbproject/private/
+#build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+### TortoiseGit ###
+# Project-level settings
+/.tgitconfig
+
+
+### eclipse ###
+*.project
+*.settings
+*.classpath
+
+### Android ###
+# Built application files
+*.apk
+*.ap_
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+#bin/
+gen/
+out/
+
+# Log files
+*.log
+
+# output files
+Ergebnis.xml

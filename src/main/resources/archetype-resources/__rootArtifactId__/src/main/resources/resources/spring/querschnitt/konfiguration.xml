@@ -1,0 +1,35 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <!--
+        =====================================================================================================
+        Dies ist die Spring-Konfigurationsdatei für alle Querschnitts-Beans. Zu diesen Beans gehoeren: - Die
+        Konfigurator-Bean fuer die Platzhalter-Ersetzung in den uebrigen Spring-Konfigurationsdateien - Die
+        Property-Bean mit der Anwendungs-Konfiguration. - Die ResourceBundle-Bean mit den Texten fuer die
+        Anwendung Diese Konfigurationsdatei muss immer in den Spring-Kontext eingebunden werden. Autor Simon
+        Spielmann Version ${symbol_dollar}Id: konfiguration.xml 162720 2014-10-03 10:52:07Z sdm_waugustyn ${symbol_dollar}
+        =====================================================================================================
+    -->
+
+    <!--
+        =====================================================================================================
+        Diese Bean enthält die Anwendungskonfiguration
+        =====================================================================================================
+    -->
+    <bean id="konfiguration"
+        class="de.bund.bva.pliscommon.konfiguration.common.impl.ReloadablePropertyKonfiguration">
+        <constructor-arg>
+            <list>
+                <value>/resources/default.properties</value>
+                <value>/config/jpa.properties</value>
+                <value>/config/${artifactId}.properties</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>

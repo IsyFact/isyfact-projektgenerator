@@ -1,0 +1,13 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!DOCTYPE hibernate-configuration SYSTEM
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <mapping class="de.bund.bva.pliscommon.nummernkreise.persistence.impl.DatumNummernkreis" />
+        <mapping class="de.bund.bva.pliscommon.protokollierung.persistence.impl.Protokolltext" />
+        <mapping class="de.bund.bva.pliscommon.protokollierung.persistence.impl.LoeschSperre" />
+        <mapping resource="resources/plis-batchrahmen/hibernate/hibernate-mapping.xml"/>
+    </session-factory>
+</hibernate-configuration>qq

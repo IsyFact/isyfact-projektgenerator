@@ -1,0 +1,89 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/tx 
+                        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+                        
+    <!-- ====================================================================== 
+         In dieser Bean wird eine EntityManagerFactory erzeugt 
+         ====================================================================== -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence" />
+        <property name="persistenceUnitName" value="hibernatePersistence" />
+        <property name="dataSource">
+            <ref bean="appDataSource" />
+        </property>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect
+                </prop>
+                <prop key="hibernate.connection.isolation">4</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="hibernate.connection.characterEncoding">utf-8</prop>
+                <prop key="hibernate.jdbc.batch_size">20</prop>
+                <prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.default_schema">${symbol_dollar}{database.schema.default}</prop>
+                <!-- Hibernate-Mappings und Lazy-Loading per Default werden hibernate.cfg.xml konfiguriert -->
+                <prop key="hibernate.ejb.cfgfile">/resources/persistence/hibernate.cfg.xml
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="appDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <description>The data source.</description>
+        <property name="driverClassName">
+            <value>oracle.jdbc.OracleDriver</value>
+        </property>
+        <property name="url">
+            <value>${symbol_dollar}{database.url}</value>
+        </property>
+        <property name="username">
+            <value>${symbol_dollar}{database.username}</value>
+        </property>
+        <property name="password">
+            <value>${symbol_dollar}{database.password}</value>
+        </property>
+        <property name="maxActive">
+            <value>${symbol_dollar}{database.connections.max.active}</value>
+        </property>
+        <property name="maxIdle">
+            <value>${symbol_dollar}{database.connections.max.active}</value>
+        </property>
+    </bean>
+
+    <!-- ====================================================================== 
+         Der zu verwendende Transaction-Manager.
+         ====================================================================== -->
+    <!--
+        depends-on wird benoetigt, damit der jpaTemplateHolder initialisiert wird, bevor die Transaktion
+        startet. Somit ist er fuer alle DAO-Klassen verfuegbar.
+    -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory">
+            <ref bean="entityManagerFactory" />
+        </property>
+    </bean>
+
+    <!-- Transaktionssteuerung per Annotationen -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- Diese Bean sorgt dafür, dass in den mit @PersistenceContext annotierten DAOs der EntityManager gesetzt 
+        wird -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+    <!-- Diese Bean sorgt dafür, dass in mit @Repository annotierten DAOs die JPA-Exception auf die besser behandelbaren 
+        Spring-Persistence-Exceptions übersetzt werden -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+</beans>

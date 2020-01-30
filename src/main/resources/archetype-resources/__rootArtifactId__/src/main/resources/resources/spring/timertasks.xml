@@ -1,0 +1,64 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <!-- ======================================================================
+        Diese Konfigurationsdateil enthält alle Beans für TimerTasks.
+        Das sind Aktvitäten, die Regelmäßig durch Spring-Timer ausgeführt werden.
+
+        Autor Simon Spielmann
+        Version ${symbol_dollar}Id: timertasks.xml 163509 2014-10-17 09:34:28Z sdm_kwezowski ${symbol_dollar}
+        ====================================================================== -->
+
+    <!-- ========================================================================
+        Diese Bean konfiguriert den ScheduledTimerTask für den Watchdog.
+        Dazu wird mit der MethodInvokingTimerTaskFactoryBean ein TimerTask erzeugt,
+        welcher die Prüfmethode der Admin-Komponente (admin-Bean) aufruft.
+        Dieser Task wird dann als ScheduledTimerTask mit dem konfigurierten Interval und Delay
+        als Bean konfiguriert.
+        =========================================================================
+    -->
+    <bean id="watchdogTask" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask"
+        scope="singleton">
+        <!-- wait 5 seconds before starting repeated execution -->
+        <property name="delay" value="5000" />
+        <property name="period" value="${symbol_dollar}{admin.watchdog.interval}" />
+        <property name="runnable">
+            <bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <property name="targetObject" ref="administation" />
+                <property name="targetMethod" value="pruefeSystem" />
+            </bean>
+        </property>
+    </bean>
+
+
+    <!-- Dieser Task sorgt für das regelmäßige Pollen der Konfigurationsdateien -->
+    <bean id="konfigurationPollingTask" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask"
+        scope="singleton">
+        <!-- wait 5 seconds before starting repeated execution -->
+        <property name="delay" value="5000" />
+        <property name="period" value="${symbol_dollar}{konfiguration.reload.interval}" />
+        <property name="runnable">
+            <bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
+                <property name="targetObject" ref="konfiguration" />
+                <property name="targetMethod" value="checkAndUpdate" />
+            </bean>
+        </property>
+    </bean>
+
+    <!--
+        Die TimerFactory-Bean sorgt dafür, dass die angegebenen Tasks gemäß ihrem Scheduling ausgeführt werden.
+    -->
+    <bean id="timerFactory" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean">
+        <property name="scheduledExecutorTasks">
+            <list>
+                <ref bean="watchdogTask" />
+                <ref bean="konfigurationPollingTask" />
+            </list>
+        </property>
+    </bean>
+
+</beans>

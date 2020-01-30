@@ -1,0 +1,101 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+    <!-- ======================================================================
+        In dieser Datei werden die Spring-Beans fuer die Batches eines Registers
+        konfiguriert. Die Beans werden als Spring-Kontext geladen und die Bean
+        mit der id "batchrahmen" wird ausgefuehrt.
+        
+        Der Spring-Kontext dieser Datei ist ein Unter-Kontext des eigentlichen
+        Register-Anwendungskontext, welcher unter resources/batch/register 
+        konfiguriert wird: Die Beans des Register-Kontextes sind fuer den 
+        Batchrahmen-Kontext verfuegbar.
+        
+        In der vorliegenden Datei werden deshalb nur die zusaetzlich benoetigten
+        Beans konfiguriert: Die Batchrahmen-Beans, die Ausfuehrer-Beans der
+        einzelnen Batches sowie die JMX-Beans fuer den Export des Batch-Status. 
+        
+        Autor Christian Hinken
+        Version ${symbol_dollar}Id: Batchrahmen.xml 173682 2015-06-11 13:43:30Z sdm_sspielmann ${symbol_dollar}
+        ====================================================================== -->
+
+    <!-- ======================================================================
+        Die Bean fuer den Batchrahmen. Diese Bean muss entwender "batchrahmen"
+        genannt werden, oder ihr Name muss in der Property-Datei in Property 
+        Batchrahmen.BeanName abgelegt werden.
+        ====================================================================== -->
+    <bean id="batchrahmen" class="de.bund.bva.pliscommon.batchrahmen.core.rahmen.impl.BatchrahmenImpl">
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="jmxBean" ref="batchVerarbeitung" />
+    </bean>
+
+    <!-- ======================================================================
+        Die Ausfuehrer-Bean fuer den CdErworben-Batch.
+        ====================================================================== -->
+    <!--<bean id="batch1"
+        class="${package}.batch.meldung.CdErworbenBatch">
+        <property name="meldung" ref="meldung" />
+        <property name="registerKonfiguration" ref="konfiguration" />
+        <property name="kontextVerwalter" ref="kontextVerwalter" />
+    </bean>-->
+
+    <!-- ======================================================================
+        Die Ausfuehrer-Bean fuer den CdVerkauft-Batch.
+        ====================================================================== -->
+    <!--<bean id="batch2"
+        class="${package}.batch.meldung.CdVerkauftBatch">
+        <property name="meldung" ref="meldung" />
+        <property name="auskunft" ref="auskunft" />
+        <property name="kontextVerwalter" ref="kontextVerwalter" />
+    </bean>-->
+
+    <!-- ======================================================================
+        Diese Bean erzeugt einen MBean-Exporter. Der MBeanExporter stellt die
+        in der Property "Beans" angegebenen Spring-Beans als MBeans bereit.
+        D.h. diese Beans sind dann ueber JMX sichtbar.
+        Der MBeanExporter nutzt die als "assembler" angegebene Bean um alle
+        Informationen fuer das Management-Interface der zu exportierenden
+        MBeans zu ermitteln.
+        ====================================================================== -->
+    <bean id="mBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+        <property name="autodetect" value="false" />
+        <property name="assembler">
+            <bean class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+                <property name="attributeSource">
+                    <bean class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
+                </property>
+            </bean>
+        </property>
+        <property name="beans">
+            <map>
+                <entry
+                    key="de.bund.bva.bfs.common:type=Batchrahmen,name=&quot;Batchrahmen-Verarbeitung&quot;"
+                    value-ref="batchVerarbeitung" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- ======================================================================
+        Die JMX-Bean des Batchrahmens.
+        ====================================================================== -->
+    <bean id="batchVerarbeitung" class="de.bund.bva.pliscommon.batchrahmen.core.rahmen.jmx.BatchRahmenMBean" />
+    
+    <!--
+        ======================================================================
+        @Gesichert auswerten.
+        ======================================================================
+    -->
+    <aop:config>
+        <aop:advisor
+            pointcut="@annotation(de.bund.bva.pliscommon.sicherheit.annotation.Gesichert) || @within(de.bund.bva.pliscommon.sicherheit.annotation.Gesichert)"
+            advice-ref="gesichertInterceptor" order="100"/>
+    </aop:config>    
+</beans>

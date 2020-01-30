@@ -1,0 +1,23 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Anwendung AnwendungsId="${artifactId}"
+	xmlns:tns="http://www.example.org/RollenRechteSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/RollenRechteSchema RollenRechteSchema.xsd ">
+	<tns:rollen RolleId="ABH">
+		<tns:rechtId Id="Auslesen" />
+		<tns:rechtId Id="Melden" />
+		<tns:rechtId Id="Protokollrecherche" />
+	</tns:rollen>
+	<tns:rechte>
+		<tns:rechtId Id="Auslesen" />
+	</tns:rechte>
+	<tns:rechte>
+		<tns:rechtId Id="Melden" />
+	</tns:rechte>
+	<tns:rechte>
+		<tns:rechtId Id="Protokollrecherche" />
+	</tns:rechte>
+</tns:Anwendung>

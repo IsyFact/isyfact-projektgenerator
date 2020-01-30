@@ -1,0 +1,38 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    <!-- ======================================================================
+        Dies ist die Spring-Konfigurationsdatei für die Service-Schnittstellen.
+        Autor Simon Spielmann
+        Version ${symbol_dollar}Id: service.xml 162720 2014-10-03 10:52:07Z sdm_waugustyn ${symbol_dollar}
+        ====================================================================== -->
+  
+    <!-- ======================================================================
+        Die eigentliche Implementierung der HttpInvoker-Schnittstelle der Auskunft.
+        ======================================================================  -->
+    <!-- Exception-Fassade der Auskunft. Implementiert das AuskunftRemoteInterface. -->
+    <bean id="auskunftExceptionFassade"
+        class="${package}.service.auskunft.httpinvoker.v1_0.impl.AuskunftExceptionFassade">
+        <property name="auskunftService">
+            <bean
+                class="${package}.service.auskunft.httpinvoker.v1_0.impl.AuskunftServiceImpl">
+                <property name="auskunft" ref="auskunft" />
+                <property name="dozer" ref="dozer" />
+                <!--property name="sicherheit" ref="sicherheit" /-->
+            </bean>
+        </property>
+    </bean>
+
+    <!-- ======================================================================
+        Die eigentliche Implementierung der HttpInvoker-Schnittstelle der Administration.
+        ======================================================================  -->
+    <!-- Exception-Fassade der Admin-Komponente. Implementiert das AdminRemoteInterface. -->
+    <bean id="adminExceptionFassade"
+        class="${package}.service.admin.httpinvoker.v1_0.impl.AdministrationExceptionFassade">
+    </bean>
+
+</beans>

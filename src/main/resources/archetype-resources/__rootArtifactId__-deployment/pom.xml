@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================================     
+    Maven Projektmodell zur Erzeugung der RPM-Pakete
+    
+    Haupt Maven-Aufrufe mit diesem POM:
+    - mvn package          			     : Übersetzen des Projekts und Erzeugung des RPMs
+    - mvn -Pinstall-rpm integration-test : Tomcat stoppen und Pakete installieren
+    
+    Optionen
+    -Dbuild.number=X   : (Optional) Build-Nummer des Projektes. Wird bei der RPM-Erzeugung verwendet. Der Default Wert ist 1.
+   
+
+    Author: Simon Spielmann
+    Revision: $Id: pom.xml 163804 2014-10-22 07:54:47Z sdm_kwezowski $           
+    =============================================================================================  --><project>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <packaging>pom</packaging>
+    <name>${artifactId}</name>
+    <description>RPM-Release</description>
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}-parent</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Baue und Verpacke Projekt -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/SOURCES</outputDirectory>
+                            <excludeTransitive>true</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+				
+				<dependencies>
+				  <dependency>
+					<groupId>ant-contrib</groupId>
+					<artifactId>ant-contrib</artifactId>
+					<version>1.0b3</version>
+					<exclusions>
+					  <!-- Neuere Version von Ant erzw -->
+					  <exclusion>
+						<groupId>ant</groupId>
+						<artifactId>ant</artifactId>
+					  </exclusion>
+					</exclusions>
+				  </dependency>
+				</dependencies>
+		
+                <executions>
+
+                    <!-- Baue das RPM-Packet -->
+                    <execution>
+                        <id>build-rpm</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Ant-Skript zur Erzeugung des RPM-Pakets -->
+                            <tasks>
+                                <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath" />
+								
+                                <property name="project.version" value="${project.version}" />
+                                <property name="build.number" value="${build.number}" />
+
+                                <!-- Ersetzung von "-" in Snapshot-Versionen mit ".", weil laut RPM-Spezifikation kein - erlaubt ist in der Version -->
+                                <propertyregex property="rpm.version" input="${project.version}" regexp="[-_]" replace="." global="true" override="true" defaultValue="${project.version}" />
+
+                                <ant antfile="${basedir}/build.xml">
+                                    <property name="project.name" value="${rootArtifactId}" />
+                                    <target name="rpm" />
+                                </ant>
+
+                                <ant antfile="${basedir}/build.xml">
+                                    <property name="project.name" value="${rootArtifactId}-batch" />
+                                    <target name="rpm" />
+                                </ant>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- Tomcat-Steuerung und RPM-Installation, wird bei Messung der Code-Überdeckung benötigt -->
+        <profile>
+            <id>install-rpm</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <executions>
+                            <!-- Installiere das RPM-Paket -->
+
+                            <execution>
+                                <id>install-rpm</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Ant-Skript zur Installation der RPM-Pakete -->
+                                    <tasks>
+                                        <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath" />
+										
+                                        <property name="project.version" value="${project.version}" />
+                                        <property name="build.number" value="${build.number}" />
+                                        <property name="tomcat.home" value="${tomcat.home}" />
+
+                                        <propertyregex property="rpm.version" input="${project.version}" regexp="[-_]" replace="." global="true" override="true" defaultValue="${project.version}" />
+
+                                        <ant antfile="${basedir}/../build.xml">
+                                            <target name="tomcat-stop" />
+                                        </ant>
+
+                                        <ant antfile="${basedir}/build.xml">
+                                            <property name="project.name" value="${rootArtifactId}" />
+                                            <target name="install" />
+                                        </ant>
+
+                                        <ant antfile="${basedir}/build.xml">
+                                            <property name="project.name" value="${rootArtifactId}-batch" />
+                                            <target name="install" />
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}-batch</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

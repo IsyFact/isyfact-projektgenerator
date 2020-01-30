@@ -1,0 +1,62 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!-- 
+Dieses Build-File enthält Targets für die Steuerung des Tomcat
+Die Targets werden durch Maven aufgerufen (siehe pom.xml).
+
+Zum Aufruf des Skriptes müssen folgende Properties gesetzt sein:
+
+tomcat.home			Das Tomcat-Home-Verzeichnis
+-->
+
+<project name="${rootArtifactId}" basedir=".">
+	<!-- Die folgende Properties werden benutzt, um den Status des Tomcats überprüfen zu können -->
+	<property name="tomcat.host" value="localhost" />
+	<property name="tomcat.url.isAlive" value="http://${symbol_dollar}{tomcat.host}:8080/${rootArtifactId}/Loadbalancer" />
+	<property name="tomcat.port.control" value="8009" />
+	
+	<!-- In dieser Property-Datei speichert Cobertura den Pfad zum Datafile, welches die Überdeckungsstatistik enthält.
+		 Durch diese Anweisung wird die entsprechende Property in Ant hereingeladen. -->
+	<property file="${symbol_dollar}{tomcat.home}/webapps/cd-register/WEB-INF/classes/cobertura.properties" />
+
+
+	<target name="tomcat-start" description="Startet Tomcat">
+		<echo message="Starte Tomcat..." />
+		<echo message="Benutze Cobertura-Datafile: ${symbol_dollar}{cobertura.datafile}"/>
+		
+		<exec executable="${symbol_dollar}{tomcat.home}/bin/startup.bat" spawn="true" os="Windows">
+			<!-- Übergibt den Pfad zum Cobertura-Datafile als Parameter für Tomcat in CATALINA_OPTS -->
+			<env key="CATALINA_OPTS" value="-Dnet.sourceforge.cobertura.datafile=${symbol_dollar}{cobertura.datafile}" />
+		</exec>
+		<exec executable="/etc/init.d/${rootArtifactId}-tomcat" spawn="true" os="Linux">
+			<arg value="start"/>
+			<!-- Übergibt den Pfad zum Cobertura-Datafile als Parameter für Tomcat in CATALINA_OPTS -->		
+			<env key="CATALINA_OPTS" value="-Dnet.sourceforge.cobertura.datafile=${symbol_dollar}{cobertura.datafile}" />
+		</exec>
+				
+		<!-- Wartet bis Tomcat per HTTP erreichbar ist -->
+		<echo message="Warte auf ${symbol_dollar}{tomcat.url.isAlive}" />
+		<waitfor maxwait="600000" checkevery="100">
+			<http url="${symbol_dollar}{tomcat.url.isAlive}" />
+		</waitfor>
+		
+	</target>
+
+	<target name="tomcat-stop" description="Stoppt Tomcat">
+		<echo message="Stoppe Tomcat ${symbol_dollar}{tomcat.home}..." />
+		
+		<exec executable="${symbol_dollar}{tomcat.home}/bin/shutdown.bat" failonerror="true" os="Windows" />
+		<exec executable="/etc/init.d/${rootArtifactId}-tomcat" failonerror="true" os="Linux">
+			<arg value="stop"/>
+		</exec>
+		
+		<!-- Wartet bis der Control-Port von Tomcat nicht mehr erreichbar ist -->
+		<echo message="Warte auf Stop von Socket ${symbol_dollar}{tomcat.host}:${symbol_dollar}{tomcat.port.control}" />
+		<waitfor maxwait="120000" checkevery="500">
+			<not>
+				<socket server="${symbol_dollar}{tomcat.host}" port="${symbol_dollar}{tomcat.port.control}" />
+			</not>
+		</waitfor>
+	</target>
+</project>

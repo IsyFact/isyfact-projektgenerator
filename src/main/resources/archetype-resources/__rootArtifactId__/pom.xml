@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =============================================================================================     
+    Haupt Maven Projektmodell von @mvn.project.name@
+    
+    Haupt Maven-Aufrufe mit diesem POM:
+
+    Optionen:
+    -Drelease=x.x.x       : Manuelles Setzen der Release-Nummer
+    -Ddevelop             : Aktiviert Konfiguration für Entwicklung  
+    
+    Author: Simon Spielmann
+    Revision: $Id: pom.xml 163804 2014-10-22 07:54:47Z sdm_kwezowski $      
+    =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <packaging>war</packaging>
+    <version>${version}</version>
+    <name>${artifactId}</name>
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}-parent</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <!-- =============================================================================================
+        Liste der benoetigten Bibliotheken.
+        ============================================================================================= -->
+    <dependencies>    
+        <!-- HTTPInvoker-Schnittstelle des Registers einbinden -->
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${artifactId}-httpinvoker-sst-admin-v1.0</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${artifactId}-httpinvoker-sst-auskunft-v1.0</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <!-- Bibliothek für die Verwaltung der Anwendungskonfiguration -->
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-konfiguration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-batchrahmen</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-logging</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-exception-core</artifactId>
+        </dependency>
+
+        <!-- AufrufkontextTo -->
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-serviceapi-sst</artifactId>
+        </dependency>
+        
+        <!-- Benötigt für Logging-Kontext (setzen der Korr-Id). -->
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-serviceapi-core</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-util</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-persistence</artifactId>
+        </dependency>
+
+        <!-- Bibliothek mit den MBeans für die Überwachung -->
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-ueberwachung</artifactId>
+        </dependency>
+
+        <!-- Bibliothek fuer Autorisierung -->
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-sicherheit</artifactId>
+        </dependency>
+
+        <!-- Bibliothek fuer Regelwerke -->
+        <dependency>
+            <groupId>de.bund.bva.registerfactory</groupId>
+            <artifactId>rf-regelwerk</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Servlet-API nicht ins WAR-File -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Spring Dependencies -->
+
+        <!-- Benoetigt u.a. fuer JMX -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+
+        <!-- Benoetigt fuer AOP -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
+
+        <!--  Benoetigt fuer SpringDispatcher Servlet -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!-- Benoetigt fuer Datenbankabstraktion -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+ 
+        <!-- EL wird ab Tomcat 6 bereits durch den Tomcat bereitgestellt. Daher muss sie explizit als vorhanden 
+            deklariert werden. -->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Dozer (Bean Mapping) -->
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Slf4J, wird von Hibernate genutzt -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- Connection Pool fuer Hibernate -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>de.bund.bva.registerfactory</groupId>
+            <artifactId>rf-nummernkreis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.bund.bva.registerfactory.protokollierung</groupId>
+            <artifactId>rf-protokollierung</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.oracle.jdbc</groupId>
+                    <artifactId>xmlparserv2</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+</project>
