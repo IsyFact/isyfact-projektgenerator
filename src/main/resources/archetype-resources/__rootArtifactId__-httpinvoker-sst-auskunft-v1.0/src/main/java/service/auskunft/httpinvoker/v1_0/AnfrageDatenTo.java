@@ -3,6 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.auskunft.httpinvoker.v1_0;
 
-public class AnfrageDatenTo {
+import java.io.Serializable;
+
+public class AnfrageDatenTo implements Serializable {
 
 }

@@ -24,7 +24,7 @@ public class AwfRegisterEintragSuchen {
         // Schritt 7: Ergebnis aufbereiten
         
         // Schritt 8: Ergebnis protokollieren
-        return null;
+        return new AuskunftErgebnis();
     }
 
 }

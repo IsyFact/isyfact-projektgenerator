@@ -17,5 +17,10 @@
 	<!-- ======================================================================
 		Beans der Komponente "Auskunft".
 		====================================================================== -->
-	<bean id="auskunft" class="de.bund.core.auskunft.impl.AuskunftImpl"/>
+	<bean id="auskunft" class="${package}.core.auskunft.impl.AuskunftImpl">
+		<property name="awfRegisterEintragSuchen" ref="awfRegisterEintragSuchen"/>
+	</bean>
+
+	<bean id="awfRegisterEintragSuchen" class="${package}.core.auskunft.impl.AwfRegisterEintragSuchen"/>
+
 </beans>
