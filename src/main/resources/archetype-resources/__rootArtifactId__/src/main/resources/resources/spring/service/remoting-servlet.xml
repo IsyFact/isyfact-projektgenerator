@@ -14,10 +14,7 @@
      
      In dieser Datei werden die HttpInvoker-Services des Registers
      definiert.
-     
-     Autor Simon Spielmann
-     Version: ${symbol_dollar}Id: remoting-servlet.xml 162720 2014-10-03 10:52:07Z sdm_waugustyn ${symbol_dollar}
-     ======================================================================  -->  
+     ======================================================================  -->
      
 	<!-- ======================================================================
      Die HTTP-Invoker Schnittstelle: Der Export des Auskunft-Services.
@@ -25,7 +22,7 @@
     <bean name="/AuskunftBean_v1_0" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="auskunftExceptionFassade"/>
         <property name="registerTraceInterceptor" value="false"/>
-        <property name="serviceInterface" value="${package}.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean"/>
+        <property name="serviceInterface" value="de.bund.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean"/>
     </bean>
     
     <!-- ======================================================================
@@ -34,7 +31,7 @@
     <bean name="/AdminBean_v1_0" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="adminExceptionFassade"/>
         <property name="registerTraceInterceptor" value="false"/>
-        <property name="serviceInterface" value="${package}.service.admin.httpinvoker.v1_0.AdministrationRemoteBean"/>
+        <property name="serviceInterface" value="de.bund.service.admin.httpinvoker.v1_0.AdministrationRemoteBean"/>
     </bean>   
 
 

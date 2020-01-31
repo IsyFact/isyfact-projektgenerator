@@ -13,7 +13,7 @@
         Diese Konfiguration wird nicht im Batch verwendet.
         
         Autor Simon Spielmann
-        Version ${symbol_dollar}Id: ueberwachung.xml 163411 2014-10-16 11:30:42Z sdm_kwezowski ${symbol_dollar}
+        Version $symbol_dollarId: ueberwachung.xml 163411 2014-10-16 11:30:42Z sdm_kwezowski $symbol_dollar
         ====================================================================== -->
 
     
@@ -21,7 +21,7 @@
         Beans der Komponente "Administration".
         ====================================================================== -->    
     <bean id="administation"
-        class="${package}.core.admin.impl.AdministrationImpl">
+        class="de.bund.core.admin.impl.AdministrationImpl">
         <property name="watchdogMBean" ref="watchdogMonitor" />
         <property name="konfiguration" ref="konfiguration" />
     </bean>
@@ -46,10 +46,10 @@
         <property name="beans">
             <map>
                 <entry
-                    key="${package}:type=ServiceStatistik,name=&quot;Auskunft-Statistik&quot;"
+                    key="de.bund:type=ServiceStatistik,name=&quot;Auskunft-Statistik&quot;"
                     value-ref="auskunftMonitor" />
                 <entry
-                    key="${package}:type=StatusMonitor,name=&quot;Status-Ueberwachung&quot;"
+                    key="de.bund:type=StatusMonitor,name=&quot;Status-Ueberwachung&quot;"
                     value-ref="watchdogMonitor" />
             </map>
         </property>
@@ -74,7 +74,7 @@
 	
         <aop:aspect id="auskunftMonitorAdvice" ref="auskunftMonitor">
             <aop:pointcut id="auskunftServiceMethode"
-                expression="target(${package}.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean)" />
+                expression="target(de.bund.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean)" />
         </aop:aspect>
 
     </aop:config>

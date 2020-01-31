@@ -17,9 +17,6 @@
         
         Hier nicht vorhanden aber typische Querschnittsbeans sind Beans fuer
         Mailing, Fehlerbehandlung etc.
-        
-        Autor Christian Hinken
-        Version ${symbol_dollar}Id: querschnitt.xml 162720 2014-10-03 10:52:07Z sdm_waugustyn ${symbol_dollar}
         ====================================================================== -->
 
     <!-- Diese Datei faßt alle Konfiguration des Querschnitts zusammen. -->

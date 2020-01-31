@@ -12,15 +12,10 @@
 		Ueblicherweise wird pro Komponente eine Bean fuer eine Verwalter-Klasse
 		konfiguriert. Diese Verwalter-Klasse instanziiert dann das Objekt-Geflecht
 		der Komponente. Bei Bedarf koennen weitere Beans erstellt werden.
-		
-		Autor Christian Hinken
-		Version ${symbol_dollar}Id: auskunft.xml 162720 2014-10-03 10:52:07Z sdm_waugustyn ${symbol_dollar}
 		====================================================================== -->
 
 	<!-- ======================================================================
 		Beans der Komponente "Auskunft".
 		====================================================================== -->
-	<bean id="auskunft"
-		class="${package}.core.auskunft.impl.AuskunftImpl">
-	</bean>
+	<bean id="auskunft" class="de.bund.core.auskunft.impl.AuskunftImpl"/>
 </beans>

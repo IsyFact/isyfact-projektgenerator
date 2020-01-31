@@ -4,61 +4,63 @@
 package ${package}.service.auskunft.httpinvoker.v1_0.impl;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.NDC;
 
 import ${package}.service.auskunft.httpinvoker.v1_0.AnfrageDatenTo;
 import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftErgebnisTo;
 import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean;
-import de.bund.bva.pliscommon.serviceapi.service.httpinvoker.v1_0_0.AufrufKontextTo;
 import ${package}.common.exception.AusnahmeIdUtil;
+
+import de.bund.bva.pliscommon.serviceapi.common.exception.PlisExceptionMapper;
+import de.bund.common.exception.AuskunftException;
+import de.bund.bva.pliscommon.serviceapi.service.httpinvoker.v1_0_0.AufrufKontextTo;
 import de.bund.bva.pliscommon.util.exception.MessageSourceFehlertextProvider;
+import de.bund.service.auskunft.httpinvoker.v1_0.AuskunftTechnicalToException;
 
 /**
- * 
- * @author sd&amp;m AG, Max Mustermann
- * @version ${symbol_dollar}Id: AuskunftExceptionFassade.java 107737 2011-07-21 09:52:17Z sdm_fsenn ${symbol_dollar}
- *
+ * Diese Klasse f&uuml;hrt das Exception-Handling f&uuml;r den Auskunft-Service durch.
  */
 public class AuskunftExceptionFassade implements AuskunftRemoteBean {
 
     /**
-    * Der Logger dieser Klasse.
-    */
+     * Der Logger dieser Klasse.
+     */
     private static final Logger LOG = Logger.getLogger(AuskunftExceptionFassade.class);
-    
+
     /**
-    * Die Referenz auf den {@link AuskunftService}.
-    */
+     * Die Referenz auf den {@link AuskunftService}.
+     */
     private AuskunftService auskunftService;
 
     /**
-    * Der Setter fuer den {@link AuskunftService}. Dieser wird von Spring aufgerufen.
-    * @param auskunftService der AuskunftService.
-    */
+     * Der Setter fuer den {@link AuskunftService}. Dieser wird von Spring aufgerufen.
+     * @param auskunftService der AuskunftService.
+     */
     public void setAuskunftService(AuskunftService auskunftService) {
-    	this.auskunftService = auskunftService;
+        this.auskunftService = auskunftService;
     }
 
     /**
-    * {@inheritDoc}
-    */
-    public AuskunftErgebnisTo fuehreAuskunftDurch(AufrufKontextTo kontext, AnfrageDatenTo anfrageDaten) {
-    
-    	try {
-    		return auskunftService.fuehreAuskunftDurch(kontext, anfrageDaten);
-    		// TODO: Die Transformation der Exceptions muss ggf. angepasst werden.
-    	} catch (Throwable t) {
-    		// Unbekannte Exceptions in Schnittstellen-Exceptions transformieren.
+     * {@inheritDoc}
+     */
+    public AuskunftErgebnisTo fuehreAuskunftDurch(AufrufKontextTo kontext, AnfrageDatenTo anfrageDaten)
+            throws AuskunftTechnicalToException {
 
-    		/* 
-    		AuskunftTechnikToException ex = PlisExceptionMapper.createToException(AusnahmeIdUtil.getAusnahmeId(t), new MessageSourceFehlertextProvider(), AuskunftTechnikToException.class, t.getMessage());
-    		LOG.error("Methode 'fuehreAuskunftDurch' fehlgeschlagen. Übergebener Fehler:" + ex.getMessage(), t);
-    		throw ex;
-    	    */
-    	    
-    		throw null; // TODO remove
-    	}
-    	
+        try {
+            return auskunftService.fuehreAuskunftDurch(kontext, anfrageDaten);
+        } catch (AuskunftException e) {
+            // Unbekannte Exceptions in Schnittstellen-Exceptions transformieren.
+            AuskunftTechnicalToException ex = PlisExceptionMapper.createToException(
+                    AusnahmeIdUtil.getAusnahmeId(e),
+                    new MessageSourceFehlertextProvider(),
+                    AuskunftTechnicalToException.class,
+                    e.getMessage());
+
+            LOG.error("Methode 'fuehreAuskunftDurch' fehlgeschlagen. Übergebener Fehler:" + ex.getMessage(), e);
+
+            throw ex;
+
+        }
+
     }
 
 }

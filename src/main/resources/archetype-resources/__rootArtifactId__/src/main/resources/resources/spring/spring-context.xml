@@ -19,30 +19,14 @@
             <list>
                 <value>classpath:/resources/default.properties</value>
                 <value>classpath:/config/jpa.properties</value>
-                <value>classpath:/config/${artifactId}.properties</value>
+                <value>classpath:/config/${rootArtifactId}.properties</value>
             </list>
         </property>
     </bean>
 
-    <!-- ======================================================================
-        Diese Bean sorgt fuer die Message-ResourceBundle Bereitstellung, 
-        zugreifbar ueber Klasse SpringContextHolder.
-        ====================================================================== -->
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-        lazy-init="false">
-        <property name="basenames">
-            <list>
-                <value>resources/nachrichten/fachlich</value>
-                <value>resources/nachrichten/fehler</value>
-            </list>
-        </property>
-    </bean>
-
-    <!--
-        =====================================================================================================
+    <!-- =====================================================================================================
         Speichert die Message-Source fuer statische Zugriffe auf Messages.
-        =====================================================================================================
-    -->
+    ===================================================================================================== -->
     <bean id="messageSourceHolder" class="de.bund.bva.pliscommon.util.spring.MessageSourceHolder" />
 
 </beans>

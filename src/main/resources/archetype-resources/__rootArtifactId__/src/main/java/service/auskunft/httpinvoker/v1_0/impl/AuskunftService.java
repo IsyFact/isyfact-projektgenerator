@@ -6,6 +6,7 @@ package ${package}.service.auskunft.httpinvoker.v1_0.impl;
 import de.bund.bva.pliscommon.serviceapi.service.httpinvoker.v1_0_0.AufrufKontextTo;
 import ${package}.service.auskunft.httpinvoker.v1_0.AnfrageDatenTo;
 import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftErgebnisTo;
+import ${package}.common.exception.AuskunftException;
 
 /**
  * Interface der Service Auskunft.
@@ -13,8 +14,8 @@ import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftErgebnisTo;
 public interface AuskunftService {
 
     /**
-    * {@inheritDoc}
+    * Diese Operation führt eine Auskunft durch.
     */
-    public AuskunftErgebnisTo fuehreAuskunftDurch(AufrufKontextTo kontext, AnfrageDatenTo anfrageDaten);
+    public AuskunftErgebnisTo fuehreAuskunftDurch(AufrufKontextTo kontext, AnfrageDatenTo anfrageDaten) throws AuskunftException;
 
 }

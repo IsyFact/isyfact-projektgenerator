@@ -8,10 +8,7 @@ import org.apache.log4j.Logger;
 import ${package}.service.admin.httpinvoker.v1_0.AdministrationRemoteBean;
 
 /**
- * Diese Klasse f&uuml;hrt das Exception-Handling f&uuml;r den Administrations-Service durch.
- * 
- * @author Capgemini sd&amp;m AG, Andy Scherzinger
- * @version ${symbol_dollar}Id: AdministrationExceptionFassade.java 85801 2010-04-05 16:45:07Z sdm_fsenn ${symbol_dollar}
+ * Diese Klasse f&uuml;hrt das Exception-Handling f&uuml;r den Administration-Service durch.
  */
 public class AdministrationExceptionFassade implements AdministrationRemoteBean {
     /** Der Logger dieser Klasse. */

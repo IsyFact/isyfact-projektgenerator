@@ -22,9 +22,6 @@
         In der vorliegenden Datei werden deshalb nur die zusaetzlich benoetigten
         Beans konfiguriert: Die Batchrahmen-Beans, die Ausfuehrer-Beans der
         einzelnen Batches sowie die JMX-Beans fuer den Export des Batch-Status. 
-        
-        Autor Christian Hinken
-        Version ${symbol_dollar}Id: Batchrahmen.xml 173682 2015-06-11 13:43:30Z sdm_sspielmann ${symbol_dollar}
         ====================================================================== -->
 
     <!-- ======================================================================
@@ -35,13 +32,19 @@
     <bean id="batchrahmen" class="de.bund.bva.pliscommon.batchrahmen.core.rahmen.impl.BatchrahmenImpl">
         <property name="transactionManager" ref="transactionManager" />
         <property name="jmxBean" ref="batchVerarbeitung" />
+        <property name="aufrufKontextFactory" ref="aufrufKontextFactory"/>
+        <property name="aufrufKontextVerwalter" ref="aufrufKontextVerwalter"/>
     </bean>
+
+    <bean id="aufrufKontextFactory" class="de.bund.bva.pliscommon.aufrufkontext.impl.AufrufKontextFactoryImpl"/>
+
+    <bean id="aufrufKontextVerwalter" class="de.bund.bva.pliscommon.aufrufkontext.impl.AufrufKontextVerwalterImpl"/>
 
     <!-- ======================================================================
         Die Ausfuehrer-Bean fuer den CdErworben-Batch.
         ====================================================================== -->
     <!--<bean id="batch1"
-        class="${package}.batch.meldung.CdErworbenBatch">
+        class="de.bund.batch.meldung.CdErworbenBatch">
         <property name="meldung" ref="meldung" />
         <property name="registerKonfiguration" ref="konfiguration" />
         <property name="kontextVerwalter" ref="kontextVerwalter" />
@@ -51,7 +54,7 @@
         Die Ausfuehrer-Bean fuer den CdVerkauft-Batch.
         ====================================================================== -->
     <!--<bean id="batch2"
-        class="${package}.batch.meldung.CdVerkauftBatch">
+        class="de.bund.batch.meldung.CdVerkauftBatch">
         <property name="meldung" ref="meldung" />
         <property name="auskunft" ref="auskunft" />
         <property name="kontextVerwalter" ref="kontextVerwalter" />

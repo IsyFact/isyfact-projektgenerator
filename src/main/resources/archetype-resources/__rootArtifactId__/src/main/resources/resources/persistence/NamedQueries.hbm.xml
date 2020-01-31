@@ -16,9 +16,6 @@
 	
 	Native SQL ist nur fuer Sonderfaelle zu verwenden, etwa wenn Oracle
 	SQL Index Hints gegeben werden muessen.
-	
-	Autor: Christian Hinken
-	Revision: ${symbol_dollar}Id: NamedQueries.hbm.xml 52606 2008-09-30 10:53:54Z sdm_sspielmann ${symbol_dollar}
 	====================================================================== -->
 
 <hibernate-mapping default-lazy="true">
@@ -31,4 +28,5 @@
 	<query name="bestand.lese.alle"><![CDATA[select b from Bestand b]]></query>
 	<query name="protokoll.suche.nach.isbn"><![CDATA[select protokoll from ProtokollEintrag protokoll where protokoll.isbn = ?1]]></query>
 -->
+
 </hibernate-mapping>

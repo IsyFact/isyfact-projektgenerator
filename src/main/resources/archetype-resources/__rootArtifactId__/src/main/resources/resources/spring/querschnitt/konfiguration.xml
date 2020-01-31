@@ -11,8 +11,7 @@
         Dies ist die Spring-Konfigurationsdatei für alle Querschnitts-Beans. Zu diesen Beans gehoeren: - Die
         Konfigurator-Bean fuer die Platzhalter-Ersetzung in den uebrigen Spring-Konfigurationsdateien - Die
         Property-Bean mit der Anwendungs-Konfiguration. - Die ResourceBundle-Bean mit den Texten fuer die
-        Anwendung Diese Konfigurationsdatei muss immer in den Spring-Kontext eingebunden werden. Autor Simon
-        Spielmann Version ${symbol_dollar}Id: konfiguration.xml 162720 2014-10-03 10:52:07Z sdm_waugustyn ${symbol_dollar}
+        Anwendung Diese Konfigurationsdatei muss immer in den Spring-Kontext eingebunden werden.
         =====================================================================================================
     -->
 
@@ -27,7 +26,7 @@
             <list>
                 <value>/resources/default.properties</value>
                 <value>/config/jpa.properties</value>
-                <value>/config/${artifactId}.properties</value>
+                <value>/config/${rootArtifactId}.properties</value>
             </list>
         </constructor-arg>
     </bean>

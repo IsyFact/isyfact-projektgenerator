@@ -33,23 +33,8 @@ public class AusnahmeIdUtil {
         } else if (throwable instanceof JmxException) {
             // generische JMX-Fehlermeldung
             return "XXXXX";
-        } 
-        /*
-        else if (throwable instanceof CdRegisterBusinessException) {
-            LOG.warn("Es wurde eine CdRegisterBusinessException analysiert. "
-                    + "Eigentlich sollte diese Verarbeitung über catch-Blöcke geschehen.");
-            // Fehler-Code auslesen
-            return ((CdRegisterException) throwable).getAusnahmeId();
-        } else if (throwable instanceof CdRegisterTechnicalException) {
-            LOG.warn("Es wurde eine CdRegisterTechnicalException analysiert. "
-                    + "Eigentlich sollte diese Verarbeitung über catch-Blöcke geschehen.");
-            // Fehler-Code auslesen
-            return ((CdRegisterException) throwable).getAusnahmeId();
-        } else if (throwable instanceof CdRegisterTechnicalRuntimeException) {
-            // Fehler-Code auslesen
-            return ((CdRegisterTechnicalRuntimeException) throwable).getAusnahmeId();
         }
-        */
+
         // Kein Mapping Möglich: generische Fehlermeldung
         LOG.debug("Die Exception der Klasse " + throwable.getClass()
                 + "wurde keiner Kategorie zugeordnet: Ausgabe einer generischen Fehlermeldung.");

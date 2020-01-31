@@ -2,7 +2,7 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<tns:Anwendung AnwendungsId="${artifactId}"
+<tns:Anwendung AnwendungsId="${rootArtifactId}"
 	xmlns:tns="http://www.example.org/RollenRechteSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.example.org/RollenRechteSchema RollenRechteSchema.xsd ">

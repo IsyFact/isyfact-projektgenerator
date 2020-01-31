@@ -10,4 +10,4 @@
         <mapping class="de.bund.bva.pliscommon.protokollierung.persistence.impl.LoeschSperre" />
         <mapping resource="resources/plis-batchrahmen/hibernate/hibernate-mapping.xml"/>
     </session-factory>
-</hibernate-configuration>qq
+</hibernate-configuration>

@@ -5,7 +5,6 @@ package ${package}.core.auskunft;
 
 /**
  * Beispiel-Ergebnis-Objekt für Anfrage-Daten für Auskünfte.
- * 
  */
 public class AnfrageDaten {
 
