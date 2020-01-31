@@ -13,7 +13,7 @@
         Diese Konfiguration wird nicht im Batch verwendet.
         
         Autor Simon Spielmann
-        Version $symbol_dollarId: ueberwachung.xml 163411 2014-10-16 11:30:42Z sdm_kwezowski $symbol_dollar
+        Version ${symbol_dollar}Id: ueberwachung.xml 163411 2014-10-16 11:30:42Z sdm_kwezowski ${symbol_dollar}
         ====================================================================== -->
 
     

@@ -31,7 +31,7 @@
                 <prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">false</prop>
-                <prop key="hibernate.default_schema">$symbol_dollar{database.schema.default}</prop>
+                <prop key="hibernate.default_schema">${symbol_dollar}{database.schema.default}</prop>
                 <!-- Hibernate-Mappings und Lazy-Loading per Default werden hibernate.cfg.xml konfiguriert -->
                 <prop key="hibernate.ejb.cfgfile">/resources/persistence/hibernate.cfg.xml
                 </prop>
@@ -45,19 +45,19 @@
             <value>oracle.jdbc.OracleDriver</value>
         </property>
         <property name="url">
-            <value>$symbol_dollar{database.url}</value>
+            <value>${symbol_dollar}{database.url}</value>
         </property>
         <property name="username">
-            <value>$symbol_dollar{database.username}</value>
+            <value>${symbol_dollar}{database.username}</value>
         </property>
         <property name="password">
-            <value>$symbol_dollar{database.password}</value>
+            <value>${symbol_dollar}{database.password}</value>
         </property>
         <property name="maxActive">
-            <value>$symbol_dollar{database.connections.max.active}</value>
+            <value>${symbol_dollar}{database.connections.max.active}</value>
         </property>
         <property name="maxIdle">
-            <value>$symbol_dollar{database.connections.max.active}</value>
+            <value>${symbol_dollar}{database.connections.max.active}</value>
         </property>
     </bean>
 

@@ -10,7 +10,7 @@
         Das sind Aktvitäten, die Regelmäßig durch Spring-Timer ausgeführt werden.
 
         Autor Simon Spielmann
-        Version $symbol_dollarId: timertasks.xml 163509 2014-10-17 09:34:28Z sdm_kwezowski $symbol_dollar
+        Version ${symbol_dollar}Id: timertasks.xml 163509 2014-10-17 09:34:28Z sdm_kwezowski ${symbol_dollar}
         ====================================================================== -->
 
     <!-- ========================================================================
@@ -25,7 +25,7 @@
         scope="singleton">
         <!-- wait 5 seconds before starting repeated execution -->
         <property name="delay" value="5000" />
-        <property name="period" value="$symbol_dollar{admin.watchdog.interval}" />
+        <property name="period" value="${symbol_dollar}{admin.watchdog.interval}" />
         <property name="runnable">
             <bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
                 <property name="targetObject" ref="administation" />
@@ -40,7 +40,7 @@
         scope="singleton">
         <!-- wait 5 seconds before starting repeated execution -->
         <property name="delay" value="5000" />
-        <property name="period" value="$symbol_dollar{konfiguration.reload.interval}" />
+        <property name="period" value="${symbol_dollar}{konfiguration.reload.interval}" />
         <property name="runnable">
             <bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
                 <property name="targetObject" ref="konfiguration" />
