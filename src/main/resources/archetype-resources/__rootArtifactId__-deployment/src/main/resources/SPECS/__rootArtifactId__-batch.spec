@@ -23,6 +23,7 @@
 Name: @project.name@
 Version: @rpm.version@
 Release: @build.number@
+License: Commercial
 BuildArch: noarch
 #URL: http://
 
