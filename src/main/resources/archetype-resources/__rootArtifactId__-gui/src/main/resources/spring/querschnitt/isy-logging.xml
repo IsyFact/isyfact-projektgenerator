@@ -1,0 +1,45 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <!-- Autoproxies einschalten -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- Interceptor zum Loggen an Systemgrenzen. -->
+    <bean id="boundaryLogInterceptor"
+          class="de.bund.bva.isyfact.logging.util.LoggingMethodInterceptor">
+        <property name="loggeDauer" value="${symbol_dollar}{isylogging.boundary.loggeDauer}"/>
+        <property name="loggeAufruf" value="${symbol_dollar}{isylogging.boundary.loggeAufruf}"/>
+        <property name="loggeErgebnis" value="${symbol_dollar}{isylogging.boundary.loggeErgebnis}"/>
+        <property name="loggeDatenBeiException" value="${symbol_dollar}{isylogging.boundary.loggeDatenBeiException}"/>
+    </bean>
+
+    <!-- Interceptor zum Loggen an Komponentengrenzen. -->
+    <bean id="componentLogInterceptor"
+          class="de.bund.bva.isyfact.logging.util.LoggingMethodInterceptor">
+        <property name="loggeDauer" value="${symbol_dollar}{isylogging.component.loggeDauer}"/>
+        <property name="loggeAufruf" value="${symbol_dollar}{isylogging.component.loggeAufruf}"/>
+        <property name="loggeErgebnis" value="${symbol_dollar}{isylogging.component.loggeErgebnis}"/>
+        <property name="loggeDatenBeiException" value="${symbol_dollar}{isylogging.boundary.loggeDatenBeiException}"/>
+    </bean>
+
+    <bean id="statusLogger"
+          class="de.bund.bva.isyfact.logging.util.LogApplicationListener">
+        <property name="systemart" value="${symbol_dollar}{isylogging.systemart}"/>
+        <property name="systemname" value="${symbol_dollar}{isylogging.application.name}"/>
+        <property name="systemversion" value="${symbol_dollar}{isylogging.application.version}"/>
+    </bean>
+
+    <!-- AOP-Advice für das Logging konfigurieren -->
+    <aop:config>
+        <!-- Pointcuts an den Komponentengrenzen -->
+        <aop:advisor order="1000" advice-ref="componentLogInterceptor"
+                     pointcut="execution (public * ${package}.core.*.*.*(..))"/>
+    </aop:config>
+
+</beans>

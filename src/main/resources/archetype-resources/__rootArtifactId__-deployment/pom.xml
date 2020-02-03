@@ -10,7 +10,7 @@
     -Dbuild.number=X   : (Optional) Build-Nummer des Projektes. Wird bei der RPM-Erzeugung verwendet. Der Default Wert ist 1.
     =============================================================================================  --><project>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${artifactId}</artifactId>
+    <artifactId>${rootArtifactId}-deployment</artifactId>
     <version>${version}</version>
     <packaging>pom</packaging>
     <name>${artifactId}</name>

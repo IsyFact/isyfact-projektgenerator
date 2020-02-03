@@ -1,0 +1,37 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${artifactId}</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-dateFormat.min.js"></script>
+    <script type="text/javascript" src="resources/js/eintraege.js"></script>
+</head>
+
+<body onload="ladeEintraege()">
+<h1>${artifactId}</h1>
+<br>
+<div id="eintrag_form">
+    <div>
+        <input type="text" id="verfasser_input" value="" placeholder="Name">
+    </div>
+    <div>
+        <textarea rows="10" id="text_input" placeholder="Text"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Abschicken!" onclick="neuenEintragErstellen()">
+    </div>
+</div>
+<hr>
+<div>
+    <ol id="eintraege">
+    </ol>
+</div>
+
+<br>
+</body>
+</html>
