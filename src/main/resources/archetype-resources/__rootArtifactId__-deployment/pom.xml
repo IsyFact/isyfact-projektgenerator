@@ -8,10 +8,6 @@
     
     Optionen
     -Dbuild.number=X   : (Optional) Build-Nummer des Projektes. Wird bei der RPM-Erzeugung verwendet. Der Default Wert ist 1.
-   
-
-    Author: Simon Spielmann
-    Revision: $Id: pom.xml 163804 2014-10-22 07:54:47Z sdm_kwezowski $           
     =============================================================================================  --><project>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>${artifactId}</artifactId>

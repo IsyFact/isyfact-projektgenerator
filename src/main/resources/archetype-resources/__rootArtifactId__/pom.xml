@@ -7,9 +7,6 @@
     Optionen:
     -Drelease=x.x.x       : Manuelles Setzen der Release-Nummer
     -Ddevelop             : Aktiviert Konfiguration für Entwicklung  
-    
-    Author: Simon Spielmann
-    Revision: $Id: pom.xml 163804 2014-10-22 07:54:47Z sdm_kwezowski $      
     =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>${artifactId}</artifactId>

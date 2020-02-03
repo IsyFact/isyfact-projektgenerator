@@ -5,9 +5,6 @@
     Haupt Maven-Aufrufe mit diesem POM:
     mvn -o -Dmaven.repo.local=repository package    Erzeugt ein RPM der Anwendung (offline)
     mvn -o -Dmaven.repo.local=repository deploy     Erzeugt ein RPM der Anwendung und installiert es (offline)
-    
-    Author: Simon Spielmann
-    Revision: $Id: pom.xml 163494 2014-10-17 08:37:49Z sdm_kwezowski $    
     =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>

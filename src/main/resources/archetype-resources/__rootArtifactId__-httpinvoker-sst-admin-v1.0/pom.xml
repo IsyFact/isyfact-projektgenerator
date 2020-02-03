@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- =============================================================================================     
     Maven Projektmodell für die HttpInvoker-Schnittstellen
-    
-    Autor Simon Spielmann
-    Version $Id: pom.xml 163482 2014-10-17 08:17:56Z sdm_kwezowski $
     =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>${artifactId}</artifactId>
