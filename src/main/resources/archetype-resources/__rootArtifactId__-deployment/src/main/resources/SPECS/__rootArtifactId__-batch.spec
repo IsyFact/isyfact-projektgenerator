@@ -23,10 +23,6 @@
 Name: @project.name@
 Version: @rpm.version@
 Release: @build.number@
-License: Commercial
-Group: Applications/Productivity
-Vendor: Capgemini
-Packager: Capgemini
 BuildArch: noarch
 #URL: http://
 
@@ -49,7 +45,7 @@ Summary: PLIS-Anwendung
 
 # Umfassende Beschreibung der Anwendung
 %description
-Dieses Paket enthaelt die PLIS-Anwendung...
+Dieses Paket enthaelt die ${rootArtifactId}-Anwendung...
 
 # === PREP-Bereich, wird als erstes ausgef�hrt ===
 %prep

@@ -7,9 +7,6 @@
 <!-- ======================================================================
      Dies ist die Spring Konfigurationsdatei fuer einen HttpInvoker Client.
      Sie enthaelt bis auf die Remote-Bean keine weiteren Konfigurationen. 
-     
-     Autor Christian Hinken
-     Version ${symbol_dollar}Revision: 98456 ${symbol_dollar}
      ====================================================================== -->
 	
     <!-- ======================================================================
@@ -25,9 +22,9 @@
         </property>
     </bean>
 
-	<!-- ======================================================================
-     Die HTTP-Invoker Schnittstelle für die Meldungskomponente des CD-Registers.
-     Dieses wird dem Client ueber das Jar meldung-httpinvoker-sst bekannt
+    <!-- ======================================================================
+     Die HTTP-Invoker Schnittstelle für die Auskunftkomponente.
+     Dieses wird dem Client ueber das Jar auskunft-httpinvoker-sst bekannt
      gemacht.
      ======================================================================  -->
      <bean id="auskunftRemoteBean" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
