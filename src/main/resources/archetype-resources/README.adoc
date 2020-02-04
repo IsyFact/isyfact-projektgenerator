@@ -1,0 +1,95 @@
+= IsyFact-Projektgenerator
+
+Das Projekt enthält einen Projektgenerator in Form eines Maven Archetypes.
+Ein mit dem Projektgenerator erzeugtes Projekt enthält die wesentlichen Untermodule mit der Verzeichnisstruktur für Code,
+Tests und Konfigurationsdateien. Bei den Modulen handelt es sich um:
+
+- Eine Web-Anwendung
+- Zwei HTTPInvoker-Schnittstellen
+- Einer Service-Anwendung
+- Einem Client
+- Einem Deployment-Modul
+- Einem Batch-Modul
+
+Das generierte Projekt stellt somit einen Ausgangspunkt für Code, Tests und Konfigurationsdateien für ein eigenes Projekt zur Verfügung.
+
+== Verwendung
+
+Vor der Verwendeng muss der Archetype gebaut und im lokalen Maven-Repository installiert werden.
+
+=== Bau des Archetypes und Installation in lokales Maven-Repository
+
+1. Download der Sourcen:
+
+    git clone https://github.com/IsyFact/isyfact-projektgenerator
+
+2. Bauen des Archetypes:
+
+    cd isyfact-projektgenerator
+    mvn install
+
+Der Archetype liegt nun im lokalen Maven-Repository unter `<REPO>/de/bund/bva/isyfact/isyfact-projektgenerator`.
+
+=== Generierung eines Projekts
+
+Aus dem Archetype wird ein Maven-Projekt erzeugt.
+Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile geschehen.
+
+==== Eclipse / Spring Tool Suite
+
+1. `File` -> `New` -> `Maven Project` -> Haken `Create a simple project (skip archetype selection)` nicht setzten
+2. Im Schritt `Select an Archetype` ist unter `Catalog` der Eintrag `Default local` auszuwählen.
+3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
+4. Wizard bis zum Ende ausführen.
+
+==== IntelliJ IDEA
+
+1. `File` -> `New` -> `Project...` -> Haken `Create from Archetype` setzen -> `Add Archetype`
+2. Im Dialog folgende Werte eintragen:
+
+    GroupId: de.bund.bva.isyfact
+    ArtifactId: isyfact-projektgenerator
+    Version: 1.8.0-SNAPSHOT
+    Repository (optional): local
+
+3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
+4. Wizard bis zum Ende ausführen.
+
+==== Maven (Kommandozeile)
+
+Mit dem Maven-Aufruf
+
+    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projektgenerator -DarchetypeVersion=1.7.0 -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
+
+wird ein Maven-Projekt `meinprojekt` mit der `ArtifactId` `meinprojekt` und `GroupId` `meinegroupid` erzeugt.
+
+== Die Hello-World-Anwendung des Projektgenerators
+
+Die Anwendung präsentiert eine einfache Gästebuch/Kommentar-Funktion.
+Es können Einträge unter Angabe eines Texts und eines Verfassers erstellt und gespeichert werden.
+
+Die Oberfläche verwendet HTML und JavaScript (jQuery) und kommuniziert über einen einfachen REST-Service mit dem Anwendungskern.
+Dieser speichert die Einträge in einer H2-Datenbank (in-memory).
+
+== Die HTTPInvoker-Schnittstellen
+
+Es handelt sich hier um sehr einfache Schnittstellen mit jeweils einer Methode.
+Die Admin-Schnittstelle begrenzt sich ausschließlich auf ein Interface mit einer Method.
+Die Auskunft-Schnittstelle bietet deben dem Interface Transport-Objekte und eine Exception.
+
+== Die Service-Anwendung
+
+Es handelt sich hierbei um eine Web-Anwendung, die beide Schnittstellen implementiert und mit Spring's HTTPInvokerServiceExporter zur Verfügung stellt.
+Ein Service kann dann über HTTPInvoker die Implementierung des Services nutzen.
+
+== Der Client
+
+Das Modul beinhaltet die Spring-Konfiguration zur Nutzung des bereitgestellten Services mittels der HTTPInvoker-Schnittstellen
+
+== Das Deployment-Modul
+
+Die Aufgabe dieses Moduls besteht darin anhand von .spec Konfiguration den gebauten Service und das Batch-Modul in ein RPM-Paket zu verpacken.
+
+== Des Batch-Modul
+
+Im Batch-Modul liegt Beispiel-Skripte zur Verarbeitung von Batches. Die es ermöglichen über die Konsole mite dem Anwendungskern zu kommunizieren.
