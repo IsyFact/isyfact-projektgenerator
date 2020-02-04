@@ -5,6 +5,8 @@ package ${package}.core.admin.impl;
 
 import ${package}.core.admin.Administration;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import org.apache.log4j.Logger;
 import de.bund.bva.pliscommon.konfiguration.common.ReloadableKonfiguration;
 import de.bund.bva.pliscommon.ueberwachung.common.jmx.StatusMonitorMBean;
@@ -45,6 +47,7 @@ public class AdministrationImpl implements Administration {
      * @param watchdogMBean
      *            Referenz auf die Watchdog-MBean
      */
+    @Required
     public void setWatchdogMBean(StatusMonitorMBean watchdogMBean) {
         this.watchdogMBean = watchdogMBean;
     }
@@ -54,6 +57,7 @@ public class AdministrationImpl implements Administration {
      * @param konfiguration
      *            Referenz auf die Register-Konfiguration
      */
+    @Required
     public void setKonfiguration(ReloadableKonfiguration konfiguration) {
         this.konfiguration = konfiguration;
     }

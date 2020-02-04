@@ -12,6 +12,8 @@ import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftTechnicalToException
 import ${package}.common.exception.AuskunftException;
 import ${package}.common.exception.AusnahmeIdUtil;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import de.bund.bva.pliscommon.serviceapi.common.exception.PlisExceptionMapper;
 import de.bund.bva.pliscommon.serviceapi.service.httpinvoker.v1_0_0.AufrufKontextTo;
 import de.bund.bva.pliscommon.util.exception.MessageSourceFehlertextProvider;
@@ -35,6 +37,7 @@ public class AuskunftExceptionFassade implements AuskunftRemoteBean {
      * Der Setter fuer den {@link AuskunftService}. Dieser wird von Spring aufgerufen.
      * @param auskunftService der AuskunftService.
      */
+    @Required
     public void setAuskunftService(AuskunftService auskunftService) {
         this.auskunftService = auskunftService;
     }

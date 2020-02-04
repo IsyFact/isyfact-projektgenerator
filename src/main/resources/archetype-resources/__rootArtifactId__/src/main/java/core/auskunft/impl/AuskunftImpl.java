@@ -3,6 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.core.auskunft.impl;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import ${package}.common.exception.AuskunftException;
 import ${package}.core.auskunft.AnfrageDaten;
 import ${package}.core.auskunft.Auskunft;
@@ -23,6 +25,7 @@ public class AuskunftImpl implements Auskunft {
         return awfRegisterEintragSuchen.fuehreAuskunftDurch(anfrageDaten);
     }
 
+    @Required
     public void setAwfRegisterEintragSuchen(AwfRegisterEintragSuchen awfRegisterEintragSuchen) {
         this.awfRegisterEintragSuchen = awfRegisterEintragSuchen;
     }

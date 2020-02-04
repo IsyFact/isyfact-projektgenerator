@@ -5,6 +5,8 @@ package ${package}.service.auskunft.httpinvoker.v1_0.impl;
 
 import org.dozer.Mapper;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import de.bund.bva.pliscommon.serviceapi.service.httpinvoker.v1_0_0.AufrufKontextTo;
 import ${package}.common.exception.AuskunftException;
 import ${package}.core.auskunft.AnfrageDaten;
@@ -34,6 +36,7 @@ public class AuskunftServiceImpl implements AuskunftService {
      * @param auskunft
      *            die Referenz auf die Komponente Auskunft.
      */
+    @Required
     public void setAuskunft(Auskunft auskunft) {
         this.auskunft = auskunft;
     }
@@ -44,6 +47,7 @@ public class AuskunftServiceImpl implements AuskunftService {
      * @param dozer
      *            die Referenz auf die Dozer-Mapper-Bean.
      */
+    @Required
     public void setDozer(Mapper dozer) {
         this.dozer = dozer;
     }
