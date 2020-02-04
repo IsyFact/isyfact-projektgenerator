@@ -109,6 +109,7 @@
           <directory>src/main/resources</directory>
           <includes>
             <include>**/*.spec</include>
+            <include>**/.gitkeep</include>
           </includes>
         </fileSet>
         <fileSet filtered="true" encoding="UTF-8">
