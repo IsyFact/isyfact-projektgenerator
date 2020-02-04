@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.core.auskunft;
 
-import de.bund.common.exception.AuskunftException;
+import ${package}.common.exception.AuskunftException;
 
 /**
  * Interface der Komponente Auskunft.

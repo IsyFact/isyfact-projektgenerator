@@ -8,13 +8,13 @@ import org.apache.log4j.Logger;
 import ${package}.service.auskunft.httpinvoker.v1_0.AnfrageDatenTo;
 import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftErgebnisTo;
 import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean;
+import ${package}.service.auskunft.httpinvoker.v1_0.AuskunftTechnicalToException;
+import ${package}.common.exception.AuskunftException;
 import ${package}.common.exception.AusnahmeIdUtil;
 
 import de.bund.bva.pliscommon.serviceapi.common.exception.PlisExceptionMapper;
-import de.bund.common.exception.AuskunftException;
 import de.bund.bva.pliscommon.serviceapi.service.httpinvoker.v1_0_0.AufrufKontextTo;
 import de.bund.bva.pliscommon.util.exception.MessageSourceFehlertextProvider;
-import de.bund.service.auskunft.httpinvoker.v1_0.AuskunftTechnicalToException;
 
 /**
  * Diese Klasse f&uuml;hrt das Exception-Handling f&uuml;r den Auskunft-Service durch.

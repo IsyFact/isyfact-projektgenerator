@@ -3,10 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.core.auskunft.impl;
 
-import de.bund.common.exception.AuskunftException;
-import de.bund.core.auskunft.AnfrageDaten;
-import de.bund.core.auskunft.Auskunft;
-import de.bund.core.auskunft.AuskunftErgebnis;
+import ${package}.common.exception.AuskunftException;
+import ${package}.core.auskunft.AnfrageDaten;
+import ${package}.core.auskunft.Auskunft;
+import ${package}.core.auskunft.AuskunftErgebnis;
 
 /**
  * Implementierung der Komponente Auskunft.
