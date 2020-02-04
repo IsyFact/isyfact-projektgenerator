@@ -1,8 +1,0 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
-<dataset>
-    <EINTRAG text="Kommentar1" verfasser="Autor1"/>
-    <EINTRAG text="Kommentar2" verfasser="Autor2"/>
-    <EINTRAG text="Kommentar3" verfasser="Autor3"/>
-</dataset>
