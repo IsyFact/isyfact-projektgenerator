@@ -30,7 +30,7 @@ BuildArch: noarch
 # Der Name des Quell-Pakets, aus dem das RPM gebaut wird
 Source: ${rootArtifactId}-batch-%{WarVersion}.jar
 
-# Pr�fix um RPM bei Bedarf mit relocate an andere Stelle zu installieren
+# Präfix um RPM bei Bedarf mit relocate an andere Stelle zu installieren
 Prefix: %{target_dir}
 Prefix: %{config_dir}
 Prefix: %{log_dir}
@@ -38,7 +38,7 @@ Prefix: %{log_dir}
 # Verzeichnis in dem das WAR entpackt wird
 BuildRoot : %{_tmppath}/%{fullname}-build
 
-# Abh�ngigkeiten nicht automatisch ermitteln
+# Abhängigkeiten nicht automatisch ermitteln
 AutoReqProv: no
 
 # Zusammenfassende Beschreibung der Anwendung
@@ -48,7 +48,7 @@ Summary: PLIS-Anwendung
 %description
 Dieses Paket enthaelt die ${rootArtifactId}-Anwendung...
 
-# === PREP-Bereich, wird als erstes ausgef�hrt ===
+# === PREP-Bereich, wird als erstes ausgeführt ===
 %prep
 # Auspacken des Quell-Pakets
 %setup -q -c %{fullname}
@@ -92,12 +92,12 @@ Dieses Paket enthaelt die ${rootArtifactId}-Anwendung...
 %{__chmod} u=rwX,g=rwX,o= $RPM_BUILD_ROOT/%{log_dir}
 
 
-# === CLEAN-Bereich, l�scht Zwischenergebnisse === 
+# === CLEAN-Bereich, löscht Zwischenergebnisse ===
 %clean
 %{__chmod} a=rwX -R $RPM_BUILD_ROOT
 %{__rm} -rf $RPM_BUILD_ROOT
 
-# === Das Post-Skript wird nach der RPM-Installation ausgef�hrt ===
+# === Das Post-Skript wird nach der RPM-Installation ausgeführt ===
 %post
 
 # === FILE-Bereich, bestimmt Inhalte des RPMs ===
@@ -113,6 +113,6 @@ Dieses Paket enthaelt die ${rootArtifactId}-Anwendung...
 %dir %{log_dir}
 
 # Config-Dateien in RPM aufnehmen, durch die Angabe %config(noreplace)
-# werden die Dateien beim Update nicht �berschrieben und manuelle �nderungen
+# werden die Dateien beim Update nicht überschrieben und manuelle Änderungen
 # an den Konfigs bleiben erhalten.
 %config(noreplace) %{config_dir}

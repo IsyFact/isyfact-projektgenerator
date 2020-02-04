@@ -17,7 +17,7 @@ import de.bund.bva.pliscommon.serviceapi.service.httpinvoker.v1_0_0.AufrufKontex
 import de.bund.bva.pliscommon.util.exception.MessageSourceFehlertextProvider;
 
 /**
- * Diese Klasse f&uuml;hrt das Exception-Handling f&uuml;r den Auskunft-Service durch.
+ * Diese Klasse führt das Exception-Handling für den Auskunft-Service durch.
  */
 public class AuskunftExceptionFassade implements AuskunftRemoteBean {
 

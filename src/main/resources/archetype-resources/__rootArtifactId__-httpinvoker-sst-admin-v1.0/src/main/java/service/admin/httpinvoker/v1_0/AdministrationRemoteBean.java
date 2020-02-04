@@ -5,7 +5,7 @@ package ${package}.service.admin.httpinvoker.v1_0;
 
 
 /**
- * Service-Interface f&uuml;r die Admin-Komponente.
+ * Service-Interface für die Admin-Komponente.
  */
 public interface AdministrationRemoteBean {
 

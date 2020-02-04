@@ -10,15 +10,15 @@ import org.springframework.transaction.TransactionException;
 
 
 /**
- * Klasse zum Mapping von Exceptions f&uumlo;r Schnittstellen. Die Klasse analysiert &uuml;bergebene Ausnahmen
- * und liefert die passende AusnahmeID zur Erstellung einer entsprechenden Exception zur&uuml;ck.
+ * Klasse zum Mapping von Exceptions für Schnittstellen. Die Klasse analysiert übergebene Ausnahmen
+ * und liefert die passende AusnahmeID zur Erstellung einer entsprechenden Exception zurück.
  */
 public class AusnahmeIdUtil {
     /** Der Logger. */
     private static final Logger LOG = Logger.getLogger(AusnahmeIdUtil.class);
 
     /**
-     * Liefert eine passende AusnahmeID zu einer &uuml;bergebenen Ausnahme.
+     * Liefert eine passende AusnahmeID zu einer übergebenen Ausnahme.
      * @param throwable
      *            Throwable, welches analysiert werden soll
      * @return String Ausnahme-ID

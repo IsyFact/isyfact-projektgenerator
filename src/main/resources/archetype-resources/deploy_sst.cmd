@@ -7,7 +7,7 @@ rem Deployed das Parent-Projekt
 cd %dp0%
 call mvn -N deploy
 
-rem Iteriert �ber alle Schnittstellenprojekte
+rem Iteriert über alle Schnittstellenprojekte
 @for /F %%f in ('dir /b ${rootArtifactId}-httpinvoker-sst*') do call :deploy %%f
 @pause
 @goto :eof
