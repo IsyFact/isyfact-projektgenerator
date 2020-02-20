@@ -21,6 +21,12 @@
         <version>${version}</version>
     </parent>
 
+    <!-- Setze Build-Number auf 1.
+    Wird überschrieben, falls diese explizit mit -Dbuild.number angegeben wird -->
+    <properties>
+        <build.number>1</build.number>
+    </properties>
+
     <build>
         <plugins>
             <plugin>

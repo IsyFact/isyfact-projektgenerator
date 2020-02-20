@@ -28,7 +28,7 @@
         <property name="period" value="${symbol_dollar}{admin.watchdog.interval}" />
         <property name="runnable">
             <bean class="org.springframework.scheduling.support.MethodInvokingRunnable">
-                <property name="targetObject" ref="administation" />
+                <property name="targetObject" ref="administration" />
                 <property name="targetMethod" value="pruefeSystem" />
             </bean>
         </property>

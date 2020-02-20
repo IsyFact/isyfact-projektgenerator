@@ -14,10 +14,10 @@
         ======================================================================  -->
     <!-- Exception-Fassade der Auskunft. Implementiert das AuskunftRemoteInterface. -->
     <bean id="auskunftExceptionFassade"
-        class="de.bund.service.auskunft.httpinvoker.v1_0.impl.AuskunftExceptionFassade">
+        class="${package}.service.auskunft.httpinvoker.v1_0.impl.AuskunftExceptionFassade">
         <property name="auskunftService">
             <bean
-                class="de.bund.service.auskunft.httpinvoker.v1_0.impl.AuskunftServiceImpl">
+                class="${package}.service.auskunft.httpinvoker.v1_0.impl.AuskunftServiceImpl">
                 <property name="auskunft" ref="auskunft" />
                 <property name="dozer" ref="dozer" />
                 <!--property name="sicherheit" ref="sicherheit" /-->
@@ -30,7 +30,7 @@
         ======================================================================  -->
     <!-- Exception-Fassade der Admin-Komponente. Implementiert das AdminRemoteInterface. -->
     <bean id="adminExceptionFassade"
-        class="de.bund.service.admin.httpinvoker.v1_0.impl.AdministrationExceptionFassade">
+        class="${package}.service.admin.httpinvoker.v1_0.impl.AdministrationExceptionFassade">
     </bean>
 
 </beans>

@@ -11,17 +11,14 @@
         Dies ist die Spring-Konfigurationsdatei für Beans, welche
         die Überwachung der Anwenung betreffen.
         Diese Konfiguration wird nicht im Batch verwendet.
-        
-        Autor Simon Spielmann
-        Version ${symbol_dollar}Id: ueberwachung.xml 163411 2014-10-16 11:30:42Z sdm_kwezowski ${symbol_dollar}
         ====================================================================== -->
 
     
     <!-- ======================================================================
         Beans der Komponente "Administration".
         ====================================================================== -->    
-    <bean id="administation"
-        class="de.bund.core.admin.impl.AdministrationImpl">
+    <bean id="administration"
+        class="${package}.core.admin.impl.AdministrationImpl">
         <property name="watchdogMBean" ref="watchdogMonitor" />
         <property name="konfiguration" ref="konfiguration" />
     </bean>
@@ -74,7 +71,7 @@
 	
         <aop:aspect id="auskunftMonitorAdvice" ref="auskunftMonitor">
             <aop:pointcut id="auskunftServiceMethode"
-                expression="target(de.bund.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean)" />
+                expression="target(${package}.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean)" />
         </aop:aspect>
 
     </aop:config>
