@@ -54,7 +54,7 @@ public class EintragControllerTest {
     @Test
     @ExpectedDatabase("eintraege.xml")
     public void testLeseEintraege() throws Exception {
-        String expectedContent = "[{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor1${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar1${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10T11:00Z${symbol_escape}"},{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor2${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar2${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10T12:00Z${symbol_escape}"}]";
+        String expectedContent = "[{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor1${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar1${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10T11:11:11.111+01:00[Europe/Berlin]${symbol_escape}"},{${symbol_escape}"verfasser${symbol_escape}":${symbol_escape}"Autor2${symbol_escape}",${symbol_escape}"text${symbol_escape}":${symbol_escape}"Kommentar2${symbol_escape}",${symbol_escape}"datum${symbol_escape}":${symbol_escape}"2017-01-10T12:12:12.123+01:00[Europe/Berlin]${symbol_escape}"}]";
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/eintrag").accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
