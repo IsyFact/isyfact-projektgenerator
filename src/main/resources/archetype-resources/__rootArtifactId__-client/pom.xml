@@ -5,49 +5,20 @@
     
      Profile
         stf-test    :   Aktiviert die Ausführung des Testframeworks
-    =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${artifactId}</artifactId>
-    <version>${version}</version>
-    <packaging>jar</packaging>
-    <name>${artifactId}</name>
+
     <parent>
         <groupId>${groupId}</groupId>
         <artifactId>${rootArtifactId}-parent</artifactId>
         <version>${version}</version>
     </parent>
-    
-    <!-- =============================================================================================
-        Aufruf des Ant-Buildfiles hibernate-ant.xml zur Erzeugung der Mapping-Dateien
-        sowie des XML Schemas
-        ============================================================================================= -->
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <groupId>org.apache.maven.plugins</groupId>
-                <executions>
-                    <!-- Starte Tomcat vor der Testausführung -->
-                    <execution>
-                        <id>tomcat-start</id>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Ant-Skript zum Starten des Tomcats -->
-                            <tasks>
-                                <property name="tomcat.home" value="${tomcat.home}" />
-                                <ant antfile="${basedir}/../build.xml">
-                                    <target name="tomcat-start" />
-                                </ant>
-                            </tasks>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <packaging>jar</packaging>
+
+    <name>${artifactId}</name>
 
     <!-- =============================================================================================
         Liste der benoetigten Bibliotheken.
@@ -119,5 +90,35 @@
         </dependency>
     </dependencies>
 
-
+    <!-- =============================================================================================
+        Aufruf des Ant-Buildfiles hibernate-ant.xml zur Erzeugung der Mapping-Dateien
+        sowie des XML Schemas
+        ============================================================================================= -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <!-- Starte Tomcat vor der Testausführung -->
+                    <execution>
+                        <id>tomcat-start</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Ant-Skript zum Starten des Tomcats -->
+                            <tasks>
+                                <property name="tomcat.home" value="${tomcat.home}" />
+                                <ant antfile="${basedir}/../build.xml">
+                                    <target name="tomcat-start" />
+                                </ant>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

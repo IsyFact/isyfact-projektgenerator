@@ -8,18 +8,21 @@
     
     Optionen
     -Dbuild.number=X   : (Optional) Build-Nummer des Projektes. Wird bei der RPM-Erzeugung verwendet. Der Default Wert ist 1.
-    =============================================================================================  --><project>
+    =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${rootArtifactId}-deployment</artifactId>
-    <version>${version}</version>
-    <packaging>pom</packaging>
-    <name>${artifactId}</name>
-    <description>RPM-Release</description>
+
     <parent>
         <groupId>${groupId}</groupId>
         <artifactId>${rootArtifactId}-parent</artifactId>
         <version>${version}</version>
     </parent>
+
+    <artifactId>${rootArtifactId}-deployment</artifactId>
+    <version>${version}</version>
+    <packaging>pom</packaging>
+
+    <name>${artifactId}</name>
+    <description>RPM-Release</description>
 
     <!-- Setze Build-Number auf 1.
     Wird überschrieben, falls diese explizit mit -Dbuild.number angegeben wird -->
@@ -27,10 +30,26 @@
         <build.number>1</build.number>
     </properties>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}-batch</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+
     <build>
         <plugins>
-            <plugin>
-                <!-- Baue und Verpacke Projekt -->
+            <plugin><!-- Baue und Verpacke Projekt -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -48,10 +67,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
-				
-				<dependencies>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <dependencies>
 				  <dependency>
 					<groupId>ant-contrib</groupId>
 					<artifactId>ant-contrib</artifactId>
@@ -110,8 +128,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <!-- Installiere das RPM-Paket -->
 
@@ -154,22 +172,4 @@
             </build>
         </profile>
     </profiles>
-
-
-    <dependencies>
-
-        <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}</artifactId>
-            <version>${project.version}</version>
-            <type>war</type>
-        </dependency>
-
-        <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}-batch</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-    </dependencies>
 </project>
