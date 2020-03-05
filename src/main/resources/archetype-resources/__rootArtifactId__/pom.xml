@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- =============================================================================================     
+<!-- =============================================================================================
     Haupt Maven Projektmodell von @mvn.project.name@
-    
+
     Haupt Maven-Aufrufe mit diesem POM:
 
     Optionen:
     -Drelease=x.x.x       : Manuelles Setzen der Release-Nummer
-    -Ddevelop             : Aktiviert Konfiguration für Entwicklung  
+    -Ddevelop             : Aktiviert Konfiguration für Entwicklung
     =============================================================================================  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -25,7 +25,7 @@
     <!-- =============================================================================================
         Liste der benoetigten Bibliotheken.
         ============================================================================================= -->
-    <dependencies>    
+    <dependencies>
         <!-- HTTPInvoker-Schnittstelle des Registers einbinden -->
         <dependency>
             <groupId>${groupId}</groupId>
@@ -64,18 +64,18 @@
             <groupId>de.bund.bva.isyfact</groupId>
             <artifactId>isy-serviceapi-sst</artifactId>
         </dependency>
-        
+
         <!-- Benötigt für Logging-Kontext (setzen der Korr-Id). -->
         <dependency>
             <groupId>de.bund.bva.isyfact</groupId>
             <artifactId>isy-serviceapi-core</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>de.bund.bva.isyfact</groupId>
             <artifactId>isy-util</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>de.bund.bva.isyfact</groupId>
             <artifactId>isy-persistence</artifactId>
@@ -98,7 +98,7 @@
             <groupId>de.bund.bva.registerfactory</groupId>
             <artifactId>rf-regelwerk</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -109,7 +109,12 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Servlet-API nicht ins WAR-File -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -148,8 +153,8 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
         </dependency>
- 
-        <!-- EL wird ab Tomcat 6 bereits durch den Tomcat bereitgestellt. Daher muss sie explizit als vorhanden 
+
+        <!-- EL wird ab Tomcat 6 bereits durch den Tomcat bereitgestellt. Daher muss sie explizit als vorhanden
             deklariert werden. -->
         <dependency>
             <groupId>javax.el</groupId>

@@ -1,9 +1,6 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-/**
- *
- */
 package ${package}.spring;
 
 
@@ -25,6 +22,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ${package}.core.admin.Administration;
@@ -39,11 +37,17 @@ import de.bund.bva.pliscommon.ueberwachung.common.jmx.StatusMonitorMBean;
 import de.bund.bva.pliscommon.util.spring.MessageSourceHolder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:resources/spring/application.xml",
-        "classpath:resources/spring/service/remoting-servlet.xml",
-        "classpath:resources/spring/service/service.xml",
-        "classpath:resources/spring/timertasks.xml",
-        "classpath:resources/spring/ueberwachung.xml"})
+@ContextHierarchy({
+        @ContextConfiguration("/spring/test-datasource.xml"),
+        @ContextConfiguration({
+                "/resources/spring/application.xml",
+                "/resources/spring/service/remoting-servlet.xml",
+                "/resources/spring/service/service.xml",
+                "/resources/spring/timertasks.xml",
+                "/resources/spring/ueberwachung.xml",
+                "/spring/test-jpa.xml"
+        })
+})
 public class BeanInitializationTest implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
