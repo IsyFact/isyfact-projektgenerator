@@ -1,9 +1,6 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-/**
- *
- */
 package ${package}.common.exception;
 
 import de.bund.bva.pliscommon.exception.PlisTechnicalException;

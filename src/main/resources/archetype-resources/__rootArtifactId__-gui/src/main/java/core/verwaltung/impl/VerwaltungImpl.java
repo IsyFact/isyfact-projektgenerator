@@ -10,10 +10,8 @@ import ${package}.persistence.verwaltung.dao.EintragDao;
 import ${package}.persistence.verwaltung.entity.Eintrag;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

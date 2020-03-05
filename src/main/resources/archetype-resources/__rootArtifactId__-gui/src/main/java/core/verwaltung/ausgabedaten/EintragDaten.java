@@ -3,9 +3,6 @@
 #set( $symbol_escape = '\' )
 package ${package}.core.verwaltung.ausgabedaten;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.ZonedDateTime;
 import java.time.ZonedDateTime;
 
 /**

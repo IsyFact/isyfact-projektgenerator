@@ -8,7 +8,6 @@
         <version>${version}</version>
     </parent>
 
-    <groupId>${groupId}</groupId>
     <artifactId>${rootArtifactId}-gui</artifactId>
     <version>${version}</version>
     <packaging>war</packaging>
