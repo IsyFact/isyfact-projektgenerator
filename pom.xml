@@ -9,6 +9,32 @@
 
   <name>${artifactId}</name>
   <description>Isyfact-Projektgenerator Archetype</description>
+  <url>https://github.com/IsyFact/isyfact-projektgenerator</url>
+  <organization>
+    <name>Bundesverwaltungsamt (BVA), msg systems ag</name>
+    <url>http://www.isyfact.de</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
+
+  <developers>
+     <developer>
+      <name>IsyFact-Team</name>
+      <email>isyfact@bva.bund.de</email>
+        <organization>Bundesverwaltungsamt (BVA)</organization>
+        <organizationUrl>http://www.isyfact.de</organizationUrl>
+      </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:IsyFact/isyfact-projektgenerator.git</connection>
+    <developerConnection>scm:git:git@github.com:IsyFact/isyfact-projektgenerator.git</developerConnection>
+    <url>git@github.com:IsyFact/isyfact-projektgenerator.git</url>
+  </scm>
 
   <build>
     <pluginManagement>
