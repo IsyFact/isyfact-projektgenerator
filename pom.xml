@@ -2,12 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>de.bund.bva.isyfact</groupId>
+    <artifactId>isyfact-standards</artifactId>
+    <version>1.8.0-SNAPSHOT</version>
+  </parent>
+
   <groupId>de.bund.bva.isyfact</groupId>
   <artifactId>isyfact-projektgenerator</artifactId>
   <version>1.8.0-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
 
-  <name>${artifactId}</name>
+  <name>${project.artifactId}</name>
   <description>Isyfact-Projektgenerator Archetype</description>
   <url>https://github.com/IsyFact/isyfact-projektgenerator</url>
   <organization>
