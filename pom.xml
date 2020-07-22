@@ -4,11 +4,11 @@
 
   <groupId>de.bund.bva.isyfact</groupId>
   <artifactId>isyfact-projektgenerator</artifactId>
-  <version>1.8.0</version>
+  <version>1.8.0-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
 
-  <name>IsyFact-Projektgenerator</name>
-  <description>Generiert eine IsyFact-Konforme Hello-World Anwendung</description>
+  <name>${artifactId}</name>
+  <description>Isyfact-Projektgenerator Archetype</description>
   <url>https://github.com/IsyFact/isyfact-projektgenerator</url>
   <organization>
     <name>Bundesverwaltungsamt (BVA), msg systems ag</name>
@@ -41,14 +41,7 @@
       <plugins>
         <plugin>
           <artifactId>maven-archetype-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <configuration>
-            <!-- Benötigt, damit die .gitignore in den archetype inkludiert wird. -->
-            <addDefaultExcludes>false</addDefaultExcludes>
-          </configuration>
+          <version>3.1.2</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -74,7 +67,7 @@
       <extension>
         <groupId>org.apache.maven.archetype</groupId>
         <artifactId>archetype-packaging</artifactId>
-        <version>2.4</version>
+        <version>3.1.2</version>
       </extension>
     </extensions>
   </build>

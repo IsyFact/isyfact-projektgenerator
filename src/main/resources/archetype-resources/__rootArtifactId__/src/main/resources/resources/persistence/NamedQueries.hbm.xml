@@ -1,0 +1,32 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- ======================================================================
+	Dies ist eine Hibernate-Mapping Datei. Sie wird automatisch von JPA gefunden.
+	
+	Diese Mapping-Datei ist nicht fuer das Mapping von Entitäten 
+	vorgesehen. Entitäts-Mappings werden ueber Annotationen definiert. 
+	Diese Datei ist fuer die Ablage von Query-Definitionen vorgesehen. 
+	
+	Wann immer moeglich, sollte fuer Queries die JPQL (Java Persistence Query
+	Language) verwendet werden.
+	
+	Native SQL ist nur fuer Sonderfaelle zu verwenden, etwa wenn Oracle
+	SQL Index Hints gegeben werden muessen.
+	====================================================================== -->
+
+<hibernate-mapping default-lazy="true">
+
+<!--
+	<query name="cd.suche.nach.titel"><![CDATA[select cd from Cd cd where cd.titel = ?1]]></query>
+	<query name="bestand.lese.nach.isbn"><![CDATA[select b from Bestand b where b.cd.isbn = ?1]]></query>
+	<query name="bestand.suche.nach.isbn.zeitpunkt"><![CDATA[select b from Bestand b where b.cd.isbn = ?1 and b.aktuellVon <= ?2 and b.aktuellBis > ?2]]></query>
+	<query name="bestand.lese.isbns"><![CDATA[select b.cd.isbn from Bestand  b ]]></query>
+	<query name="bestand.lese.alle"><![CDATA[select b from Bestand b]]></query>
+	<query name="protokoll.suche.nach.isbn"><![CDATA[select protokoll from ProtokollEintrag protokoll where protokoll.isbn = ?1]]></query>
+-->
+
+</hibernate-mapping>

@@ -1,0 +1,79 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/aop 
+                        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+    <!-- ======================================================================
+        Dies ist die Spring-Konfigurationsdatei für Beans, welche
+        die Überwachung der Anwenung betreffen.
+        Diese Konfiguration wird nicht im Batch verwendet.
+        ====================================================================== -->
+
+    
+    <!-- ======================================================================
+        Beans der Komponente "Administration".
+        ====================================================================== -->    
+    <bean id="administration"
+        class="${package}.core.admin.impl.AdministrationImpl">
+        <property name="watchdogMBean" ref="watchdogMonitor" />
+        <property name="konfiguration" ref="konfiguration" />
+    </bean>
+    
+    <!-- ======================================================================
+        Diese Bean erzeugt einen MBean-Exporter. Der MBeanExporter stellt die
+        in der Property "Beans" angegebenen Spring-Beans als MBeans bereit.
+        D.h. diese Beans sind dann ueber JMX sichtbar.
+        Der MBeanExporter nutzt die als "assembler" angegebene Bean um alle
+        Informationen fuer das Management-Interface der zu exportierenden
+        MBeans zu ermitteln.
+        ====================================================================== -->
+    <bean id="mBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+        <property name="assembler">
+            <bean class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+                <property name="attributeSource">
+                    <bean class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
+                </property>
+            </bean>
+        </property>
+        <property name="autodetect" value="false" />
+        <property name="beans">
+            <map>
+                <entry
+                    key="de.bund:type=ServiceStatistik,name=&quot;Auskunft-Statistik&quot;"
+                    value-ref="auskunftMonitor" />
+                <entry
+                    key="de.bund:type=StatusMonitor,name=&quot;Status-Ueberwachung&quot;"
+                    value-ref="watchdogMonitor" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- ======================================================================
+        Hier werden die MBeans als Spring-Beans konfiguriert. Der eigentliche
+        Export als MBean passiert über den Eintrag in die Beans-Map des 
+        MBeanExporters.
+        ====================================================================== -->
+    <bean id="auskunftMonitor" class="de.bund.bva.pliscommon.ueberwachung.common.jmx.ServiceStatistikMBean"
+        depends-on="mBeanExporter" />
+
+    <bean id="watchdogMonitor" class="de.bund.bva.pliscommon.ueberwachung.common.jmx.StatusMonitorMBean"
+        depends-on="mBeanExporter" />
+
+    <!-- ======================================================================
+        Hier wird ein AOP-Advice für das Monitoring der Auskunfts Komponente
+        konfiguriert.
+        ====================================================================== -->
+    <aop:config>
+	
+        <aop:aspect id="auskunftMonitorAdvice" ref="auskunftMonitor">
+            <aop:pointcut id="auskunftServiceMethode"
+                expression="target(${package}.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean)" />
+        </aop:aspect>
+
+    </aop:config>
+
+</beans>

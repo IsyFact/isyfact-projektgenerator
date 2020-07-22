@@ -1,0 +1,61 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0"?>
+<!-- 
+Dieses Build-File enthält Targets für die Behandlung von RPM-Paketen
+Die Targets werden durch Maven aufgerufen (siehe pom.xml).
+
+Zum Aufruf des Skriptes müssen folgende Properties gesetzt sein:
+
+project.name		Der Name des zu verpackenden Projektes, wird zum finden des WAR-Files und für den RPM-Paket-Namen verwendet
+project.version		Die Version des Projektes, z.B. 1.0.0
+build.number		Die Build-Nummer des Projektes, z.B. 12 (Optional, Default ist 1)
+-->
+<project name="${artifactId}" basedir=".">
+	<property name="target.dir" value="${symbol_dollar}{basedir}/target" />
+
+	<target name="rpm"
+	        description="Erzeugt RPM-Paket"
+	>
+		<echo message="Kopiere RPM-Verzeichnisse..." />
+		<copy todir="${symbol_dollar}{target.dir}/" failonerror="true" overwrite="true">
+			<fileset dir="${symbol_dollar}{basedir}/src/main/resources" />
+		</copy>
+				
+		<echo message="Ersetzte Variablen in ${symbol_dollar}{project.name}.spec..." />
+		<replace file="${symbol_dollar}{target.dir}/SPECS/${symbol_dollar}{project.name}.spec">
+			<replacefilter token="@war.version@" value="${symbol_dollar}{project.version}" />
+			<replacefilter token="@rpm.version@" value="${symbol_dollar}{rpm.version}" />
+			<replacefilter token="@build.number@" value="${symbol_dollar}{build.number}" />
+			<replacefilter token="@project.name@" value="${symbol_dollar}{project.name}" />
+			<replacefilter token="@rpm.build.dir@" value="${symbol_dollar}{target.dir}" />
+		</replace>
+
+		<condition property="message" 
+			       value="Starte RPM-Paketbau für ${symbol_dollar}{project.name}.spec..."
+			       else="Packetbau wird nur unter Linux unterstützt" >
+			<os family="Unix" />
+		</condition>		
+		<echo message="${symbol_dollar}{message}" />
+		
+		<exec executable="rpmbuild" failonerror="true" os="Linux">
+			<arg value="-bb" />
+			<arg value="${symbol_dollar}{target.dir}/SPECS/${symbol_dollar}{project.name}.spec" />
+		</exec>
+	</target>
+
+	<target name="install" description="Installiert ein RPM-Paket">
+		<condition property="message" 
+			       value="Installiere ${symbol_dollar}{project.name}-${symbol_dollar}{project.version}-${symbol_dollar}{build.number}.rpm (Update)..."
+			       else="Packetinstallation wird nur unter Linux unterstützt" >
+			<os family="Unix" />
+		</condition>		
+		<echo message="${symbol_dollar}{message}" />	
+		<exec executable="rpm" failonerror="true" os="Linux">
+			<arg value="-U" />
+			<arg value="${symbol_dollar}{target.dir}/RPMS/noarch/${symbol_dollar}{project.name}-${symbol_dollar}{project.version}-${symbol_dollar}{build.number}.noarch.rpm"
+			/>
+		</exec>
+	</target>
+</project>

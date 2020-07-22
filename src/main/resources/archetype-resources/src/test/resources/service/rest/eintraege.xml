@@ -1,7 +1,0 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
-<dataset>
-    <EINTRAG id="101" datum="2017-01-10 11:00:00.0" text="Kommentar1" verfasser="Autor1"/>
-    <EINTRAG id="102" datum="2017-01-10 12:00:00.0" text="Kommentar2" verfasser="Autor2"/>
-</dataset>

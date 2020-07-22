@@ -1,0 +1,26 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    <!-- ======================================================================
+        Dies ist eine Spring Konfigurationsdatei fuer alle nicht-fachlichen
+        Querschnitts-Beans mit Ausnahme von JPA.
+        
+        Zu diesen Beans gehoeren:
+        - Die Konfigurator-Bean fuer die Platzhalter-Ersetzung in den
+        uebrigen Spring-Konfigurationsdateien
+        - Die Property-Bean mit der Anwendungs-Konfiguration.
+        - Die ResourceBundle-Bean mit den Texten fuer die Anwendung
+        
+        Hier nicht vorhanden aber typische Querschnittsbeans sind Beans fuer
+        Mailing, Fehlerbehandlung etc.
+        ====================================================================== -->
+
+    <!-- Diese Datei faßt alle Konfiguration des Querschnitts zusammen. -->
+    <import resource="querschnitt/dozer.xml" />
+    <import resource="querschnitt/konfiguration.xml" />
+
+</beans>

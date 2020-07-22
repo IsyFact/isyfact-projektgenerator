@@ -1,0 +1,131 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0"?>
+<!-- Keine Sonderzeichen im Projektname, er ist Teil des Datenbankschema-Namens -->
+<project name="${symbol_dollar}{project.name.kurzel}" default="installAll" basedir=".">
+    <property name="dist-conf" location="${symbol_dollar}{env.DIST_PATH}/conf" />
+    <property name="database.jdbc.driverClassName" value="oracle.jdbc.OracleDriver" />
+    <property name="database.skriptordner" value="${symbol_dollar}{basedir}/src/main/skripte/sql" />
+    <property name="jpa.properties.url" value="${symbol_dollar}{basedir}/src/main/resources/config/jpa.properties" />
+    <property environment="env" />
+
+    <!-- Wenn die Umgebungsvariable PLIS_PROJECT nicht gesetzt ist, wird stattdessen der hier angegebene Wert verwendet -->
+    <property name="env.PLIS_PROJECT" value="${symbol_dollar}{project.name.kurzel}" />
+    <property name="database.skriptordner.configdb" value="${symbol_dollar}{basedir}/src/main/skripte/sql/db-install-1.0.0_00" />
+    <property name="zip.file.name" value="sql.zip" />
+
+    <!-- ======================================================================
+        Ant Build-Datei fuer das Aufsetzen des Datenbank-Schemas in der Entwicklung. 
+        =================================================================== -->
+
+    <!-- Installiert die Datenbank auf dem zentralen DB-Server. -->
+    <target name="installAll" depends="initCheckEnvVars, erzeugeNutzerUndTabellen" />
+    
+    <!-- Ueberprüft zuerst ob die benötigten PLIS-Umgebungsvariablen für die Datenbankverbindung gesetzt sind -->
+    <target name="initCheckEnvVars" unless="environment.complete">
+        <fail message="Die benoetigten Umgebungsvariablen PLIS_PROJECT und/oder PLIS_ENVIRONMENT sind nicht gesetzt. Die Werte dafuer duerfen nur lowercase sein!" />
+    </target>
+    
+    <!-- Löschen des System Benutzers -->
+    <target name="loescheRegisterUser" depends="ermittleDatenbankZugangsdaten" unless="isWindows">
+        <echo message="The operating system is: ${symbol_dollar}{os.name}, User is ${symbol_dollar}{user.name}" />
+        <get src="http://database.local.vm/dbadmin/useradmin.php?action=drop&amp;projekt=${symbol_dollar}{env.PLIS_PROJECT}&amp;umgebung=${symbol_dollar}{env.PLIS_ENVIRONMENT}&amp;system=${symbol_dollar}{ant.project.name}" dest="${symbol_dollar}{java.io.tmpdir}/dbadmin.response" />
+        <echo message="User ${symbol_dollar}{database.credentials} in zentraler DB geloescht" />
+    </target>
+    
+    <!-- Löschen des Entwickler Benutzers (nur auf Windows-Hosts) -->
+    <target name="loescheEntwicklerUser" depends="ermittleDatenbankZugangsdaten" if="isWindows">
+        <get src="http://database.local.vm/dbadmin/useradmin.php?action=drop&amp;projekt=${symbol_dollar}{env.PLIS_PROJECT}&amp;umgebung=${symbol_dollar}{env.PLIS_ENVIRONMENT}&amp;system=${symbol_dollar}{ant.project.name}&amp;user=${symbol_dollar}{user.name}" dest="${symbol_dollar}{java.io.tmpdir}/dbadmin.response" />
+        <echo message="Entwickler-User/Schemata ${symbol_dollar}{database.credentials} in zentraler DB geloescht" />
+    </target>
+    
+    <!-- ======================================================================
+       Zusätzliche Targets für das Aufsetzen des Datenbank-Schemas über das neue Persistenz-Versionierungskonzepts.
+       =================================================================== -->
+    
+    <!-- Erzeugt das hochzuladenende Zip-File -->
+    <target name="createZip" depends="ermittleDatenbankZugangsdaten">
+        <mkdir dir="target" />
+        <copy todir="${symbol_dollar}{database.credentials}">
+            <fileset dir="${symbol_dollar}{database.skriptordner.configdb}" />
+        </copy>
+        <zip destfile="${symbol_dollar}{zip.file.name}" basedir="${symbol_dollar}{basedir}" includes="${symbol_dollar}{database.credentials}/*" />
+        <delete dir="${symbol_dollar}{database.credentials}" />
+    </target>
+    
+    <!-- Substring-Funktion -->
+    <scriptdef name="substring" language="javascript">
+        <attribute name="text" />
+        <attribute name="start" />
+        <attribute name="end" />
+        <attribute name="property" /><![CDATA[
+           var text = attributes.get("text");
+           var start = attributes.get("start");
+           var end = attributes.get("end") || text.length();
+           project.setProperty(attributes.get("property"), text.substring(start, end));
+         ]]></scriptdef>
+    
+    <!-- Lädt das Zip-File auf den Server und prüft/loggt die Ausgabe -->
+    <target name="erzeugeNutzerUndTabellen" depends="createZip, initCheckEnvVars, refreshJpaProperties, loescheRegisterUser, loescheEntwicklerUser">
+        <property name="logfile" value="${symbol_dollar}{basedir}/target/out.log" />
+        <property name="filename" location="${symbol_dollar}{zip.file.name}" />
+        <taskdef resource="net/sf/antcontrib/antlib.xml" />
+        <postMethod url="http://database.local.vm/configdb/config-zip.php" responseDataFile="${symbol_dollar}{logfile}" statusCodeProperty="http.status.code">
+            <file path="${symbol_dollar}{zip.file.name}" contentType="application/zip" />
+            <responseHeader name="error_message" property="http.error.message" />
+        </postMethod>
+        <if>
+            <or>
+                <resourcecontains resource="${symbol_dollar}{logfile}" substring="ERROR" />
+                <resourcecontains resource="${symbol_dollar}{logfile}" substring="SQLPLUSFEHLER" />
+            </or>
+            <then>
+                <fail message="Erzeugen der Datenbankinhalte fehlgeschlagen. Siehe ${symbol_dollar}{logfile} fuer mehr Details." />
+            </then>
+            <elseif>
+                <isset property="http.error.message" />
+                <then>
+                    <fail message="Erzeugen der Datenbankinhalte fehlgeschlagen (Fehlermeldung: ${symbol_dollar}{http.error.message}). Siehe ${symbol_dollar}{logfile} fuer mehr Details." />
+                </then>
+            </elseif>
+            <else>
+                <echo>${symbol_dollar}{logfile}</echo>
+                <echo>Datenbankinhalte erzeugt.</echo>
+            </else>
+        </if>
+        <delete file="${symbol_dollar}{zip.file.name}" />
+    </target>
+    
+    <!-- Aktualisiert die jpa.properties nach einem Umgebungswechsel. -->
+    <target name="refreshJpaProperties" depends="ermittleDatenbankZugangsdaten">
+        <echo>Ersetze Zugangsdaten in jpa.properties mit: ${symbol_dollar}{database.credentials}</echo>
+        <replaceregexp file="${symbol_dollar}{jpa.properties.url}" match="^.*database.username.*${symbol_dollar}" replace="database.username=${symbol_dollar}{database.credentials}" byline="true" />
+        <replaceregexp file="${symbol_dollar}{jpa.properties.url}" match="^.*database.password.*${symbol_dollar}" replace="database.password=${symbol_dollar}{database.credentials}" byline="true" />
+        <replaceregexp file="${symbol_dollar}{jpa.properties.url}" match="^.*database.schema.default.*${symbol_dollar}" replace="database.schema.default=${symbol_dollar}{database.credentials}" byline="true" />
+    </target>
+    
+    <!-- Ermitteln des Benutzernames -->
+    <target name="ermittleDatenbankZugangsdaten" depends="usernameWindows, usernameUnix">
+        <echo>${symbol_dollar}{database.credentials}</echo>
+    </target>
+    <target name="usernameUnix" unless="isWindows">
+        <property name="database.credentials" value="${symbol_dollar}{env.PLIS_PROJECT}_${symbol_dollar}{env.PLIS_ENVIRONMENT}_${symbol_dollar}{ant.project.name}" />
+    </target>
+    <target name="usernameWindows" if="isWindows">
+        <property name="database.credentials" value="${symbol_dollar}{env.PLIS_PROJECT}_${symbol_dollar}{env.PLIS_ENVIRONMENT}_${symbol_dollar}{ant.project.name}_${symbol_dollar}{user.name}" />
+    </target>
+    
+    <!-- Condition für PLIS-Umgebungsvariablen -->
+    <condition property="environment.complete">
+        <and>
+            <isset property="env.PLIS_PROJECT" />
+            <isset property="env.PLIS_ENVIRONMENT" />
+        </and>
+    </condition>
+    
+    <!-- Condition für Test ob Windows/Entwickler-PC -->
+    <condition property="isWindows">
+        <os family="windows" />
+    </condition>
+</project>
