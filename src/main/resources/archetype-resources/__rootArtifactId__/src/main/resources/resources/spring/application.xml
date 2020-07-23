@@ -1,0 +1,22 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <!--
+        Diese Spring-Konfiguration importiert die Komponenten des Anwendungskerns, der Persistenz und des
+        Querschnitts. Dieses bildet die Basis des gesamten Registers.
+        
+        Die Timertask und Überwachung werden nicht importiert, da sie für Batches nicht benötigt werden.
+        Sie müssen explizit in der web.xml eingebunden werden.
+    -->
+    
+    <import resource="spring-context.xml" />
+    <import resource="querschnitt.xml" />
+    <import resource="persistence/jpa.xml" />
+    <import resource="core/auskunft.xml" />
+
+</beans>

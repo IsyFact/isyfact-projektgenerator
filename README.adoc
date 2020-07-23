@@ -1,17 +1,23 @@
 = IsyFact-Projektgenerator
 
 Das Projekt enthält einen Projektgenerator in Form eines Maven Archetypes.
-Ein mit dem Projektgenerator erzeugtes Projekt enthält:
+Ein mit dem Projektgenerator erzeugtes Projekt enthält die wesentlichen Untermodule mit der Verzeichnisstruktur für Code,
+Tests und Konfigurationsdateien. 
 
-- Eine einfache lauffähige Anwendung
-- Eine Verzeichnisstruktur für Code, Tests und Konfigurationsdateien für die wesentlichen Schichten einer IsyFact-Anwendung (Persistenz, Anwendungskern, Service/GUI)
-- Einen einfachen Integrationstest, der die Anwendung auf Lauffähigkeit prüft
+Bei den erzeugten Modulen handelt es sich um:
+
+- Eine Web-Anwendung
+- Zwei HTTPInvoker-Schnittstellen
+- Einer Service-Anwendung
+- Einem Client
+- Einem Deployment-Modul
+- Einem Batch-Modul
 
 Das generierte Projekt stellt somit einen Ausgangspunkt für Code, Tests und Konfigurationsdateien für ein eigenes Projekt zur Verfügung.
 
 == Verwendung
 
-Vor der Verwendeng muss der Archetype gebaut und im lokalen Maven-Repository installiert werden.
+Vor der Verwendung muss der Archetype gebaut und im lokalen Maven-Repository installiert werden.
 
 === Bau des Archetypes und Installation in lokales Maven-Repository
 
@@ -33,7 +39,7 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 
 ==== Eclipse / Spring Tool Suite
 
-1. `File` -> `New` -> `Maven Project` -> Haken `Create a simple project (skip archetype selection)` nicht setzten
+1. `File` -> `New` -> `Maven Project` -> Haken entfernen bei `Create a simple project (skip archetype selection)`
 2. Im Schritt `Select an Archetype` ist unter `Catalog` der Eintrag `Default local` auszuwählen.
 3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
 4. Wizard bis zum Ende ausführen.
@@ -45,7 +51,7 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 
     GroupId: de.bund.bva.isyfact
     ArtifactId: isyfact-projektgenerator
-    Version: 1.8.0
+    Version: 1.8.1-SNAPSHOT
     Repository (optional): local
 
 3. Archetype `de.bund.bva.isyfact:isyfact-projektgenerator` auswählen.
@@ -55,9 +61,13 @@ Dies kann mit Hilfe einer IDE oder direkt mit Maven auf der Kommandozeile gesche
 
 Mit dem Maven-Aufruf
 
-    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projektgenerator -DarchetypeVersion=1.8.0 -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
+    mvn archetype:generate -B -DarchetypeCatalog=local -DarchetypeGroupId=de.bund.bva.isyfact -DarchetypeArtifactId=isyfact-projektgenerator -DarchetypeVersion=1.8.1-SNAPSHOT -DgroupId=meinegroupid -DartifactId=meinprojekt -Dversion=1.0-SNAPSHOT -Dpackage=meinegroupid.meinprojekt
 
 wird ein Maven-Projekt `meinprojekt` mit der `ArtifactId` `meinprojekt` und `GroupId` `meinegroupid` erzeugt.
+
+==== Vor dem ersten Bauen
+
+Vor dem ersten Bauen des Projekts muss `mvn tidy:pom` aufgerufen werden, da wegen einer ungünstig generierten parent-pom der in 1.8.x eingeführte `mvn tidy:check` Check fehlschlägt.
 
 == Die Hello-World-Anwendung des Projektgenerators
 
@@ -66,3 +76,29 @@ Es können Einträge unter Angabe eines Texts und eines Verfassers erstellt und 
 
 Die Oberfläche verwendet HTML und JavaScript (jQuery) und kommuniziert über einen einfachen REST-Service mit dem Anwendungskern.
 Dieser speichert die Einträge in einer H2-Datenbank (in-memory).
+
+== Die HTTPInvoker-Schnittstellen
+
+Es werden zwei Schnittstellen definiert: Die Admin-Schnittstelle und die Auskunftschnittstelle.
+Die Admin-Schnittstelle enthält die Ping-Methode, die jede Anwendung zur Verfügung stellen muss.
+Die Auskunft-Schnittstelle zeigt die Definition einer Schnittstelle mit Transport-Objekten und einer Exception und kann als Vorlage für eigene Schnittstellen dienen.
+
+== Die Service-Anwendung
+
+Es handelt sich hierbei um eine Web-Anwendung, die beide Schnittstellen implementiert und mit Spring's HTTPInvokerServiceExporter zur Verfügung stellt.
+Die Service-Anwendung kann auf einem Tomcat deployt werden, sodass Anwendungen mittels HTTPInvoker auf die Schnittstellen zugreifen können.
+
+== Der Client
+
+Das Modul beinhaltet die Spring-Konfiguration zur Nutzung des bereitgestellten Services mittels der HTTPInvoker-Schnittstellen.
+Anwendungen, die auf die Service-Schnittstellen zugreifen möchten, sollten hierfür das Client-Projekt nutzen.
+
+== Das Deployment-Modul
+
+Das Deployment-Modul enthält alle Informationen, um aus der Service-Anwendung und das Batch-Modul in ein RPM-Paket zu verpacken.
+Die RPMs ermöglichen das standardmäßige Deployment der Anwendung.
+In der Regel sind hier keine Anpassungen für die Fachanwendung notwendig.
+
+== Des Batch-Modul
+
+Im Batch-Modul liegen Beispiel-Skripte zur Verarbeitung von Batches. Die es ermöglichen über die Konsole mit dem Anwendungskern zu kommunizieren.

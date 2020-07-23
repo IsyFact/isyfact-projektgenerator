@@ -1,0 +1,40 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+<!-- ======================================================================
+     Dies ist die Spring Konfigurationsdatei fuer einen HttpInvoker Client.
+     Sie enthaelt bis auf die Remote-Bean keine weiteren Konfigurationen. 
+     ====================================================================== -->
+	
+    <!-- ======================================================================
+        Diese Bean sorgt fuer die Platzhalter-Ersetzung in 
+        Spring-Konfigurationsdateien.
+        ====================================================================== -->
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/config/clienttest.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- ======================================================================
+     Die HTTP-Invoker Schnittstelle für die Auskunftkomponente.
+     Dieses wird dem Client ueber das Jar auskunft-httpinvoker-sst bekannt
+     gemacht.
+     ======================================================================  -->
+     <bean id="auskunftRemoteBean" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+         <property name="serviceUrl" value="${symbol_dollar}{register.service.url}/AuskunftBean_v1_0"/>
+         <property name="serviceInterface" value="${package}.service.auskunft.httpinvoker.v1_0.AuskunftRemoteBean"/>
+     </bean>
+     
+     <bean id="adminRemoteBean" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+         <property name="serviceUrl" value="${symbol_dollar}{register.service.url}/AdminBean_v1_0"/>
+         <property name="serviceInterface" value="${package}.service.admin.httpinvoker.v1_0.AdministrationRemoteBean"/>
+     </bean>   
+     
+</beans>
