@@ -26,9 +26,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>de.bund.bva.isyfact</groupId>
-                <artifactId>isyfact-bom</artifactId>
-                <version>1.8.1</version>
+                <groupId>de.bund.bva.registerfactory</groupId>
+                <artifactId>rf-bom</artifactId>
+                <version>1.11.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
