@@ -2,7 +2,7 @@
 
 Das Projekt enthält einen Projektgenerator in Form eines Maven Archetypes.
 Ein mit dem Projektgenerator erzeugtes Projekt enthält die wesentlichen Untermodule mit der Verzeichnisstruktur für Code,
-Tests und Konfigurationsdateien. 
+Tests und Konfigurationsdateien.
 
 Bei den erzeugten Modulen handelt es sich um:
 
@@ -85,7 +85,7 @@ Die Auskunft-Schnittstelle zeigt die Definition einer Schnittstelle mit Transpor
 
 == Die Service-Anwendung
 
-Es handelt sich hierbei um eine Web-Anwendung, die beide Schnittstellen implementiert und mit Spring's HTTPInvokerServiceExporter zur Verfügung stellt.
+Es handelt sich hierbei um eine Web-Anwendung, die beide Schnittstellen implementiert und mit `IsyHttpInvokerServiceExporter` zur Verfügung stellt.
 Die Service-Anwendung kann auf einem Tomcat deployt werden, sodass Anwendungen mittels HTTPInvoker auf die Schnittstellen zugreifen können.
 
 == Der Client
