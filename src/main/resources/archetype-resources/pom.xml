@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- =============================================================================================     
+<!-- =============================================================================================
     Haupt Maven Projektmodell für @mvn.project.name@
-    
+
     Haupt Maven-Aufrufe mit diesem POM:
     mvn -o -Dmaven.repo.local=repository package    Erzeugt ein RPM der Anwendung (offline)
     mvn -o -Dmaven.repo.local=repository deploy     Erzeugt ein RPM der Anwendung und installiert es (offline)
@@ -12,7 +12,7 @@
     <parent>
         <groupId>de.bund.bva.isyfact</groupId>
         <artifactId>isyfact-erweiterungen</artifactId>
-        <version>1.8.1</version>
+        <version>1.8.3-SNAPSHOT</version>
     </parent>
 
     <groupId>${groupId}</groupId>
