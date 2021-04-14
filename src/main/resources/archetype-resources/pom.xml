@@ -12,7 +12,7 @@
     <parent>
         <groupId>de.bund.bva.isyfact</groupId>
         <artifactId>isyfact-erweiterungen</artifactId>
-        <version>1.8.3</version>
+        <version>1.9.0</version>
     </parent>
 
     <groupId>${groupId}</groupId>
