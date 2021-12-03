@@ -1,4 +1,6 @@
-# 1.8.4
+
+# 1.9.0
+- `IFS-650`: IsyFact Erweiterungen 1.9.0
 - `IFS-686`: Property-Dateien auf Unicode Escapes umgestellt
 
 # 1.8.3
